@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://t6gn8pa0t1x"]
+
+[ext_resource type="Script" uid="uid://drfpoduhdk64r" path="res://addons/Basic FPS Player/Src/basic_player_startup.gd" id="1_onrkg"]
+[ext_resource type="PackedScene" uid="uid://kmyakts4l64t" path="res://addons/Basic FPS Player/Src/basic_player_head.tscn" id="2_i3pqv"]
+[ext_resource type="Texture2D" uid="uid://b7win50f7fcmd" path="res://images/gun_fps_clear.png" id="3_hqtel"]
+[ext_resource type="Texture2D" uid="uid://dq3xn0wvtneqo" path="res://images/roulette_clear.png" id="4_sweqy"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_onrkg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
+
+[node name="player" type="CharacterBody3D" unique_id=1453004515]
+script = ExtResource("1_onrkg")
+metadata/_custom_type_script = "uid://drfpoduhdk64r"
+
+[node name="Head" type="Node3D" parent="." unique_id=2010756420 instance=ExtResource("2_i3pqv")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=72753906]
+mesh = SubResource("CapsuleMesh_onrkg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1229018859]
+shape = SubResource("CapsuleShape3D_onrkg")
+
+[node name="Control" type="Control" parent="." unique_id=1606858615]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control" unique_id=641179227]
+visible = false
+layout_mode = 0
+offset_left = 905.0
+offset_top = 325.0
+offset_right = 986.0
+offset_bottom = 348.0
+text = "GUN HERE"
+
+[node name="Label2" type="Label" parent="Control" unique_id=1885889856]
+visible = false
+layout_mode = 0
+offset_left = 62.0
+offset_top = 303.0
+offset_right = 204.0
+offset_bottom = 326.0
+text = "Slot Machine Here"
+
+[node name="gun" type="Sprite2D" parent="Control" unique_id=1324941284]
+position = Vector2(972, 376)
+texture = ExtResource("3_hqtel")
+
+[node name="roulette" type="Sprite2D" parent="Control" unique_id=199639900]
+position = Vector2(156, 335)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_sweqy")

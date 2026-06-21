@@ -1,3 +1,33 @@
 [gd_scene format=3 uid="uid://wa1kqngettov"]
 
-[node name="main" type="Node2D" unique_id=263429153]
+[ext_resource type="PackedScene" uid="uid://t6gn8pa0t1x" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://l8crj3u0t2v4" path="res://enemy_melee.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bywnwciaeboc" path="res://enemy_ranged.tscn" id="3_h2yge"]
+
+[sub_resource type="Sky" id="Sky_h2yge"]
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 2
+sky = SubResource("Sky_h2yge")
+
+[node name="main" type="Node3D" unique_id=217003159]
+
+[node name="player" parent="." unique_id=1453004515 instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1149683, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1101560139]
+use_collision = true
+size = Vector3(50, 1, 50)
+
+[node name="enemy_melee" parent="." unique_id=1775977917 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(-0.051185567, 0, -0.9986892, 0, 1, 0, 0.9986892, 0, -0.051185567, 2.0808392, 2.6310978, -11.258803)
+
+[node name="enemy_ranged" parent="." unique_id=1433515235 instance=ExtResource("3_h2yge")]
+transform = Transform3D(-0.051185567, 0, -0.9986892, 0, 1, 0, 0.9986892, 0, -0.051185567, -2.8912096, 3.2805767, -11.93221)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=229867031]
+environment = SubResource("Environment_h2yge")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1547041126]
+transform = Transform3D(0.37088326, 0.03087905, 0.928166, -0.5974898, 0.77306145, 0.21303038, -0.71095115, -0.6335791, 0.30516547, 0, 0, 0)
+shadow_enabled = true

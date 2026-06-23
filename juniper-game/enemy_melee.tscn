@@ -1,13 +1,20 @@
 [gd_scene format=3 uid="uid://l8crj3u0t2v4"]
 
+[ext_resource type="Script" uid="uid://bojg5iayfr2ip" path="res://enemy_melee.gd" id="1_qa0bm"]
+[ext_resource type="Texture2D" uid="uid://cma4cspejdaqx" path="res://images/melee_sprite.png" id="2_et1yx"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_bu0v1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2sfwx"]
 
 [node name="enemy_melee" type="CharacterBody3D" unique_id=1775977917]
+script = ExtResource("1_qa0bm")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=472083057]
 mesh = SubResource("BoxMesh_bu0v1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=853792389]
 shape = SubResource("BoxShape3D_2sfwx")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1882234126]
+texture = ExtResource("2_et1yx")

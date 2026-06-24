@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://cjfsnvr4c8tf4"]
+
+[ext_resource type="Texture2D" uid="uid://dqfigsqvcko04" path="res://images/bomb_sprite.png" id="1_cyk8u"]
+[ext_resource type="Script" uid="uid://by4eqeyljuhg" path="res://enemy_bomb.gd" id="1_pu648"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_mct3d"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mct3d"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pu648"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_27rsx"]
+
+[node name="enemy_bomb" type="CharacterBody3D" unique_id=1746205476]
+script = ExtResource("1_pu648")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1066076153]
+visible = false
+mesh = SubResource("CylinderMesh_mct3d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1754489031]
+shape = SubResource("BoxShape3D_mct3d")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=59940902]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7501855, 0)
+texture = ExtResource("1_cyk8u")
+
+[node name="bomb" type="Area3D" parent="." unique_id=474642112]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="bomb" unique_id=1273873457]
+transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, -0.1, 0, 0.1, -4.371139e-09, 0, 0, 0)
+shape = SubResource("SphereShape3D_pu648")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="bomb" unique_id=1637420803]
+transform = Transform3D(0.25, 0, 0, 0, -1.0927847e-08, -0.25, 0, 0.25, -1.0927847e-08, 0, 0, 0)
+mesh = SubResource("SphereMesh_27rsx")
+
+[node name="shotTimer" type="Timer" parent="." unique_id=1089937515]
+wait_time = 5.0
+autostart = true
+
+[connection signal="body_entered" from="bomb" to="." method="_on_bomb_body_entered"]
+[connection signal="timeout" from="shotTimer" to="." method="_on_shot_timer_timeout"]

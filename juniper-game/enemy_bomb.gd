@@ -3,14 +3,14 @@ extends CharacterBody3D
 var target = null
 var target_position = null
 
-const HEALTH = 3
-const DAMAGE = 3
+const HEALTH = 2
+const DAMAGE = 5
 const SPEED = 5.0
 
 func _ready():
 	target = get_parent().get_node("player")
-	
-func _process(_delta):
+
+func _process(delta):
 	target_position = target.global_position
 	look_at(target_position - Vector3(0, target_position.y, 0) + Vector3(0, 1, 0))
 
@@ -21,18 +21,17 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-
 func _on_shot_timer_timeout():
-	$bullet.position = Vector3(0, 0, -1)
-	print("FIRED")
+	$bomb.position = Vector3(0, 0, -1)
+	print("LOBBED")
 	
-	$bullet/CollisionShape3D2.disabled = false
-	$bullet.global_position = $bullet.global_position.move_toward(target_position, 10)
+	$bomb/CollisionShape3D2.disabled = false
+	$bomb.global_position = $bomb.global_position.move_toward(target_position, 10)
 	$shotTimer.start()
 
 
-func _on_bullet_body_entered(body):
+func _on_bomb_body_entered(body):
 	if body.name == "player":
-		print("SHOT")
-		$bullet.position = Vector3(0, 0, -1)
-		$bullet/CollisionShape3D2.disabled = true
+		print("EXPLOSION")
+		$bomb.position = Vector3(0, 0, -1)
+		$bomb/CollisionShape3D2.disabled = true

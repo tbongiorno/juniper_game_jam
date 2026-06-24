@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://1hicyutidvbd"]
+
+[ext_resource type="Script" uid="uid://b8am2mknkg6ns" path="res://enemy_fly.gd" id="1_d6bkl"]
+[ext_resource type="Texture2D" uid="uid://2buspgh0hwmi" path="res://images/fly_sprite.png" id="1_waply"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_01tkt"]
+
+[node name="enemy_fly" type="CharacterBody3D" unique_id=443954869]
+script = ExtResource("1_d6bkl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1040828913]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1035167413]
+shape = SubResource("BoxShape3D_01tkt")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=187883710]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.790443, 0)
+texture = ExtResource("1_waply")

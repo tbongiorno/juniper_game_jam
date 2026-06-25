@@ -8,6 +8,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_2sfwx"]
 
 [node name="enemy_melee" type="CharacterBody3D" unique_id=1775977917]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 script = ExtResource("1_qa0bm")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=472083057]

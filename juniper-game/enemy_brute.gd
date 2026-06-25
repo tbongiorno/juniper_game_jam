@@ -5,7 +5,7 @@ var target_position = null
 
 const HEALTH = 10
 const DAMAGE = 7
-const SPEED = 5.0
+const SPEED = 3
 
 func _ready():
 	target = get_parent().get_node("player")

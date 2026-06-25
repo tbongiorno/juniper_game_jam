@@ -7,9 +7,9 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uxmp5"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uxmp5"]
-
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_emokg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uxmp5"]
 
 [node name="enemy_ranged" type="CharacterBody3D" unique_id=1433515235]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
@@ -26,20 +26,18 @@ shape = SubResource("BoxShape3D_uxmp5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7626476, 0)
 texture = ExtResource("2_uxmp5")
 
-[node name="bullet" type="Area3D" parent="." unique_id=1728246226]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="bullet" unique_id=1455137256]
-transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, -0.1, 0, 0.1, -4.371139e-09, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_uxmp5")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="bullet" unique_id=973644567]
-transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, -0.1, 0, 0.1, -4.371139e-09, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_emokg")
-
 [node name="shotTimer" type="Timer" parent="." unique_id=1269683126]
 wait_time = 5.0
 autostart = true
 
-[connection signal="body_entered" from="bullet" to="." method="_on_bullet_body_entered"]
+[node name="bullet" type="CharacterBody3D" parent="." unique_id=1162045854]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="bullet" unique_id=973644567]
+transform = Transform3D(0.099999994, 0, 0, 0, -4.371139e-09, -0.099999994, 0, 0.099999994, -4.371139e-09, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_emokg")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="bullet" unique_id=1455137256]
+transform = Transform3D(0.10000001, 0, 0, 0, -4.371139e-09, -0.10000001, 0, 0.10000001, -4.371139e-09, 0, 0, -0.4650054)
+shape = SubResource("CapsuleShape3D_uxmp5")
+
 [connection signal="timeout" from="shotTimer" to="." method="_on_shot_timer_timeout"]

@@ -19,8 +19,6 @@ point_count = 6
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("1_pu648")
 curve = SubResource("Curve_pu648")
-stopping_distance = null
-bomb_speed = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1066076153]
 visible = false

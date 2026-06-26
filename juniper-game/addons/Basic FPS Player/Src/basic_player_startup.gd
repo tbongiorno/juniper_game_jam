@@ -6,6 +6,7 @@ var BasicFPSPlayerScene : PackedScene = preload("basic_player_head.tscn")
 var addedHead = false
 
 var shootAvailable = true
+signal damageSignal
 
 func _enter_tree():
 	
@@ -97,14 +98,30 @@ func _ready():
 	head_start_pos = $Head.position
 
 func _physics_process(delta):
+	$RayCast3D.rotation.x = rotation_target_head
+	$RayCast3D.position = head_start_pos
+	
+	
 	if Engine.is_editor_hint():
 		return
 		
 	if Input.is_action_just_pressed("shoot") and shootAvailable:
+		
+		$RayCast3D.enabled = true
+		print($RayCast3D.get_collision_point())
+		
+		print($RayCast3D.get_collider_rid())
+		
+		
+		var point = $RayCast3D.get_collision_point()
+		$explosion.global_position = point
+		print($explosion.global_position)
+		$explosion.visible = true
 		$Control/gun.visible = false
 		$Control/shoot.visible = true
 		$shootTimer.start()
 		shootAvailable = false
+		
 	
 	# Increment player tick, used in head bob motion
 	tick += 1
@@ -248,10 +265,13 @@ func damage_player(damage):
 	print(str(health))
 	if health <= 0:
 		print("DEAD")
+		
+
 
 
 func _on_shoot_timer_timeout() -> void:
 	shootAvailable =  true
+	$explosion.visible = false
 	$Control/shoot.visible = false
 	$Control/gun.visible = true
 	pass # Replace with function body.

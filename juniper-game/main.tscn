@@ -12,6 +12,9 @@ sky = SubResource("Sky_h2yge")
 [sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
 size = Vector3(43.97397, 1, 43.54065)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_0xm2m"]
+radius = 1.9856836
+
 [node name="main" type="Node3D" unique_id=217003159]
 script = ExtResource("1_1bvp3")
 
@@ -46,9 +49,19 @@ autostart = true
 
 [node name="enemy_spawn_area" type="Area3D" parent="." unique_id=1729502391]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9462233, 0)
+collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="enemy_spawn_area" unique_id=2088047167]
 shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=425456786]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1237025, -0.51288986, -4.5317774)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1006777389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.13654, 2.0017822, -5.163206)
+shape = SubResource("SphereShape3D_0xm2m")
+debug_color = Color(0.93506, 1.92523e-05, 0.640053, 0.41960785)
 
 [connection signal="timeout" from="speed_timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="enemy_timer" to="." method="_on_enemy_timer_timeout"]

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dq3xn0wvtneqo"
-path.s3tc="res://.godot/imported/roulette_clear.png-70a38f41208baf687e74c46fc7deecd3.s3tc.ctex"
+uid="uid://d3lsg1bv1dyrq"
+path.s3tc="res://.godot/imported/explosion.png-42173277c4d47ed7add7312efcc612d3.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://images/roulette_clear.png"
-dest_files=["res://.godot/imported/roulette_clear.png-70a38f41208baf687e74c46fc7deecd3.s3tc.ctex"]
+source_file="res://images/explosion.png"
+dest_files=["res://.godot/imported/explosion.png-42173277c4d47ed7add7312efcc612d3.s3tc.ctex"]
 
 [params]
 

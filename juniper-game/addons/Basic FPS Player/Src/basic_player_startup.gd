@@ -8,6 +8,8 @@ var addedHead = false
 var shootAvailable = true
 signal damageSignal
 
+var inHud = false
+
 func _enter_tree():
 	
 	if find_child("Head"):
@@ -92,7 +94,7 @@ func _ready():
 		return
 
 	# Capture mouse if set to true
-	if CAPTURE_ON_START:
+	if CAPTURE_ON_START and not inHud:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 	head_start_pos = $Head.position
@@ -137,6 +139,9 @@ func _physics_process(delta):
 		reset_head_bob(delta)
 #@warning_ignore("")
 func _process(delta):
+	$gamblingHud/pointerFinger.global_position = $gamblingHud.get_global_mouse_position()
+	$gamblingHud/handOverlay/wheel.rotate(1)
+	
 	if Engine.is_editor_hint(): 
 		return
 	

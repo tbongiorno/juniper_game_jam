@@ -4,11 +4,17 @@
 [ext_resource type="PackedScene" uid="uid://kmyakts4l64t" path="res://addons/Basic FPS Player/Src/basic_player_head.tscn" id="2_i3pqv"]
 [ext_resource type="Texture2D" uid="uid://c3grufnkd4m73" path="res://images/hub.png" id="3_hqtel"]
 [ext_resource type="Texture2D" uid="uid://cqoihgu1kif4c" path="res://images/fire.png" id="4_sweqy"]
+[ext_resource type="Texture2D" uid="uid://djkpls72fptr1" path="res://images/big hand.png" id="5_dw050"]
 [ext_resource type="Texture2D" uid="uid://d3lsg1bv1dyrq" path="res://images/explosion.png" id="5_sweqy"]
+[ext_resource type="Texture2D" uid="uid://dlrsmlrupdxgb" path="res://images/wheel.png" id="6_b26j0"]
+[ext_resource type="Texture2D" uid="uid://bkoukueqjku5r" path="res://images/hand_point.png" id="7_n7ghd"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_onrkg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nvl01"]
+size = Vector2(75.5, 65.5)
 
 [node name="player" type="CharacterBody3D" unique_id=1453004515]
 script = ExtResource("1_onrkg")
@@ -24,6 +30,7 @@ mesh = SubResource("CapsuleMesh_onrkg")
 shape = SubResource("CapsuleShape3D_onrkg")
 
 [node name="Control" type="Control" parent="." unique_id=1606858615]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -57,6 +64,51 @@ position = Vector2(577, 322)
 texture = ExtResource("4_sweqy")
 
 [node name="crosshair" type="Sprite2D" parent="Control" unique_id=2116322776]
+
+[node name="gamblingHud" type="Control" parent="." unique_id=1385350608]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="gamblingHud" unique_id=392124481]
+visible = false
+layout_mode = 0
+offset_left = 905.0
+offset_top = 325.0
+offset_right = 986.0
+offset_bottom = 348.0
+text = "GUN HERE"
+
+[node name="Label2" type="Label" parent="gamblingHud" unique_id=246518379]
+visible = false
+layout_mode = 0
+offset_left = 62.0
+offset_top = 303.0
+offset_right = 204.0
+offset_bottom = 326.0
+text = "Slot Machine Here"
+
+[node name="handOverlay" type="Sprite2D" parent="gamblingHud" unique_id=1998529073]
+position = Vector2(577, 323)
+texture = ExtResource("5_dw050")
+
+[node name="wheel" type="Sprite2D" parent="gamblingHud/handOverlay" unique_id=2144053916]
+position = Vector2(-178, 39)
+rotation = 33009.0
+texture = ExtResource("6_b26j0")
+offset = Vector2(180, -40)
+
+[node name="pointerFinger" type="Sprite2D" parent="gamblingHud" unique_id=1413915682]
+position = Vector2(906.6451, 223.5661)
+texture = ExtResource("7_n7ghd")
+offset = Vector2(-35, 0)
+
+[node name="Area2D" type="Area2D" parent="gamblingHud/pointerFinger" unique_id=1215634398]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gamblingHud/pointerFinger/Area2D" unique_id=1406471666]
+position = Vector2(-3.75, 11.25)
+shape = SubResource("RectangleShape2D_nvl01")
 
 [node name="SlideTimer" type="Timer" parent="." unique_id=907154128]
 

@@ -77,6 +77,11 @@ var head_start_pos : Vector3
 # Current player tick, used in head bob calculation
 var tick = 0
 
+# GAMEPLAY STUFF
+var health = 100
+var damage = 5
+
+
 func _ready():
 	set_process_input(not Engine.is_editor_hint())
 	
@@ -228,3 +233,10 @@ func _on_bhop_timer_timeout() -> void:
 	current_bhop_frames = 0
 	print("FLIP IT RESET BOUNCE")
 	pass # Replace with function body.
+
+
+func damage_player(damage):
+	health -= damage
+	print(str(health))
+	if health <= 0:
+		print("DEAD")

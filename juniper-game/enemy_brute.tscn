@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://53qrlnpwsnre"]
 
-[ext_resource type="Texture2D" uid="uid://c23symrf8xgq5" path="res://images/brute_sprite.png" id="1_12pi1"]
 [ext_resource type="Script" uid="uid://dc6hmoi0hhpxs" path="res://enemy_brute.gd" id="1_ik4ec"]
+[ext_resource type="Texture2D" uid="uid://bt6clupskooeg" path="res://images/clean_brute_sprite.png" id="2_ik4ec"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ot31v"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ik4ec"]
+size = Vector3(2.47229, 2.5061035, 1)
 
 [node name="enemy_brute" type="CharacterBody3D" unique_id=1074683653]
 script = ExtResource("1_ik4ec")
@@ -15,4 +18,12 @@ shape = SubResource("BoxShape3D_ot31v")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1926109751]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.76960224, 0)
-texture = ExtResource("1_12pi1")
+texture = ExtResource("2_ik4ec")
+
+[node name="bruteArea" type="Area3D" parent="." unique_id=1192734581]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="bruteArea" unique_id=430593986]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.013366699, 0.75305176, 0)
+shape = SubResource("BoxShape3D_ik4ec")
+
+[connection signal="body_entered" from="bruteArea" to="." method="_on_brute_area_body_entered"]

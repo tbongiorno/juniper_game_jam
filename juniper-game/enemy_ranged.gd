@@ -4,19 +4,22 @@ var target = null
 var target_position = null
 
 var bullet_moving = false
-var bullet_speed = 5
+var bullet_speed = 8
 var bullet_direction = null
 
-const HEALTH = 3
-const DAMAGE = 3
-const SPEED = 4
+var HEALTH = 3
+var DAMAGE = 3
+var SPEED = 2.5
+
+var add_speed = 0
 
 func _ready():
-	target = get_parent().get_node("player")
+	target = get_parent().get_parent().get_node("player")
 
 func _process(delta):
 	target_position = target.global_position
-	look_at(target_position - Vector3(0, target_position.y, 0) + Vector3(0, 1, 0))
+	look_at(target_position - Vector3(0, target_position.y / 2, 0))
+	#global_position = global_position.move_toward(target_position, delta * (SPEED + add_speed))
 	
 	if bullet_moving:
 		$bullet.global_position -= bullet_direction * bullet_speed * delta
@@ -39,7 +42,12 @@ func _on_shot_timer_timeout():
 
 func _on_bullet_body_entered(body):
 	if body.name == "player":
+		target.damage_player(DAMAGE)
 		print("SHOT")
 		bullet_moving = false
 		$bullet.position = Vector3(0, 0.5, 0)
 		$bullet/CollisionShape3D2.disabled = true
+
+
+func set_add_speed(speed):
+	add_speed = speed

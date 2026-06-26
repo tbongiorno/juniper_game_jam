@@ -12,7 +12,6 @@
 [node name="player" type="CharacterBody3D" unique_id=1453004515]
 script = ExtResource("1_onrkg")
 IN_AIR_ACCEL = 50.0
-current_bhop_frames = null
 metadata/_custom_type_script = "uid://drfpoduhdk64r"
 
 [node name="Head" parent="." unique_id=2010756420 instance=ExtResource("2_i3pqv")]

@@ -1,52 +1,53 @@
 [gd_scene format=3 uid="uid://cjfsnvr4c8tf4"]
 
-[ext_resource type="Texture2D" uid="uid://dqfigsqvcko04" path="res://images/bomb_sprite.png" id="1_cyk8u"]
 [ext_resource type="Script" uid="uid://by4eqeyljuhg" path="res://enemy_bomb.gd" id="1_pu648"]
-
-[sub_resource type="Curve" id="Curve_pu648"]
-_data = [Vector2(0, 0.49827182), 0.0, 0.0, 0, 0, Vector2(0.09243697, 0.6555299), 1.9442812, 1.9442812, 0, 0, Vector2(0.51540613, 0.99999994), 0.0, 0.0, 0, 0, Vector2(0.73949575, 0.78283405), -2.1387093, -2.1387093, 0, 0, Vector2(0.86274505, 0.453341), -3.3707926, -3.3707926, 0, 0, Vector2(1, 0), -4.296892, 0.0, 0, 0]
-point_count = 6
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_mct3d"]
+[ext_resource type="Texture2D" uid="uid://d1rke8fyx4mtm" path="res://images/clean_bomber_sprite.png" id="2_pu648"]
+[ext_resource type="Texture2D" uid="uid://cb8ngb2q24squ" path="res://images/bomb.png" id="3_27rsx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mct3d"]
+size = Vector3(2.5048523, 2.4610596, 0.75390625)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pu648"]
+radius = 0.30508372
 
-[sub_resource type="SphereMesh" id="SphereMesh_27rsx"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pu648"]
+height = 10.865601
+radius = 18.583496
 
 [node name="enemy_bomb" type="CharacterBody3D" unique_id=1746205476]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("1_pu648")
-curve = SubResource("Curve_pu648")
-stopping_distance = null
-bomb_speed = null
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1066076153]
-visible = false
-mesh = SubResource("CylinderMesh_mct3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1754489031]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.022842407, 0.7305298, -0.123046875)
 shape = SubResource("BoxShape3D_mct3d")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=59940902]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7501855, 0)
-texture = ExtResource("1_cyk8u")
+texture = ExtResource("2_pu648")
 
 [node name="bomb" type="Area3D" parent="." unique_id=474642112]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+visible = false
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="bomb" unique_id=1273873457]
-transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, -0.1, 0, 0.1, -4.371139e-09, 0, 0, 0)
+[node name="bombCollision" type="CollisionShape3D" parent="bomb" unique_id=199665707]
+visible = false
 shape = SubResource("SphereShape3D_pu648")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="bomb" unique_id=1637420803]
-transform = Transform3D(0.25, 0, 0, 0, -1.0927847e-08, -0.25, 0, 0.25, -1.0927847e-08, 0, 0, 0)
-mesh = SubResource("SphereMesh_27rsx")
+[node name="Sprite3D" type="Sprite3D" parent="bomb" unique_id=2047146442]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0.1229143)
+texture = ExtResource("3_27rsx")
 
-[node name="shotTimer" type="Timer" parent="." unique_id=1089937515]
+[node name="explosion" type="Area3D" parent="." unique_id=2122015612]
+visible = false
+
+[node name="explosionCollision" type="CollisionShape3D" parent="explosion" unique_id=1273873457]
+transform = Transform3D(0.3, 0, 0, 0, -0.3, 2.6226834e-08, 0, -2.6226834e-08, -0.3, 0, 1.2716126, 2.682209e-07)
+shape = SubResource("CylinderShape3D_pu648")
+
+[node name="placeTimer" type="Timer" parent="." unique_id=1089937515]
 wait_time = 5.0
-autostart = true
+one_shot = true
 
 [connection signal="body_entered" from="bomb" to="." method="_on_bomb_body_entered"]
-[connection signal="timeout" from="shotTimer" to="." method="_on_shot_timer_timeout"]
+[connection signal="timeout" from="placeTimer" to="." method="_on_place_timer_timeout"]

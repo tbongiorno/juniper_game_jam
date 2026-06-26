@@ -5,6 +5,8 @@ extends CharacterBody3D
 var BasicFPSPlayerScene : PackedScene = preload("basic_player_head.tscn")
 var addedHead = false
 
+var shootAvailable = true
+
 func _enter_tree():
 	
 	if find_child("Head"):
@@ -97,6 +99,12 @@ func _ready():
 func _physics_process(delta):
 	if Engine.is_editor_hint():
 		return
+		
+	if Input.is_action_just_pressed("shoot") and shootAvailable:
+		$Control/gun.visible = false
+		$Control/shoot.visible = true
+		$shootTimer.start()
+		shootAvailable = false
 	
 	# Increment player tick, used in head bob motion
 	tick += 1
@@ -240,3 +248,10 @@ func damage_player(damage):
 	print(str(health))
 	if health <= 0:
 		print("DEAD")
+
+
+func _on_shoot_timer_timeout() -> void:
+	shootAvailable =  true
+	$Control/shoot.visible = false
+	$Control/gun.visible = true
+	pass # Replace with function body.

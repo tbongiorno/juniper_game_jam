@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://drfpoduhdk64r" path="res://addons/Basic FPS Player/Src/basic_player_startup.gd" id="1_onrkg"]
 [ext_resource type="PackedScene" uid="uid://kmyakts4l64t" path="res://addons/Basic FPS Player/Src/basic_player_head.tscn" id="2_i3pqv"]
-[ext_resource type="Texture2D" uid="uid://b7win50f7fcmd" path="res://images/gun_fps_clear.png" id="3_hqtel"]
-[ext_resource type="Texture2D" uid="uid://dq3xn0wvtneqo" path="res://images/roulette_clear.png" id="4_sweqy"]
+[ext_resource type="Texture2D" uid="uid://c3grufnkd4m73" path="res://images/hub.png" id="3_hqtel"]
+[ext_resource type="Texture2D" uid="uid://cqoihgu1kif4c" path="res://images/fire.png" id="4_sweqy"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_onrkg"]
 
@@ -47,17 +47,21 @@ offset_bottom = 326.0
 text = "Slot Machine Here"
 
 [node name="gun" type="Sprite2D" parent="Control" unique_id=1324941284]
-position = Vector2(972, 376)
+position = Vector2(577, 323)
 texture = ExtResource("3_hqtel")
 
-[node name="roulette" type="Sprite2D" parent="Control" unique_id=199639900]
-position = Vector2(156, 335)
-scale = Vector2(0.25, 0.25)
+[node name="shoot" type="Sprite2D" parent="Control" unique_id=485830275]
+visible = false
+position = Vector2(577, 322)
 texture = ExtResource("4_sweqy")
 
 [node name="SlideTimer" type="Timer" parent="." unique_id=907154128]
 
 [node name="bhopTimer" type="Timer" parent="." unique_id=635322671]
 
+[node name="shootTimer" type="Timer" parent="." unique_id=304069691]
+wait_time = 0.1
+
 [connection signal="timeout" from="SlideTimer" to="." method="_on_slide_timer_timeout"]
 [connection signal="timeout" from="bhopTimer" to="." method="_on_bhop_timer_timeout"]
+[connection signal="timeout" from="shootTimer" to="." method="_on_shoot_timer_timeout"]

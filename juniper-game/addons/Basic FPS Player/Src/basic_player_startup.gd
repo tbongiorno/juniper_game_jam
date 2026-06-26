@@ -5,6 +5,12 @@ extends CharacterBody3D
 var BasicFPSPlayerScene : PackedScene = preload("basic_player_head.tscn")
 var addedHead = false
 
+var buttonEntered = false
+var buttonLeft = false
+
+var pressedHand = preload("res://images/big hand_pressed.png")
+var hand = preload("res://images/big hand.png")
+
 var shootAvailable = true
 signal damageSignal
 
@@ -86,18 +92,24 @@ var tick = 0
 var health = 100
 var damage = 5
 
+var count = 1
+
 
 func _ready():
 	set_process_input(not Engine.is_editor_hint())
 	
 	if Engine.is_editor_hint():
 		return
-
+ 
 	# Capture mouse if set to true
 	if CAPTURE_ON_START and not inHud:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
 	head_start_pos = $Head.position
+
+func returnMouseMode():
+	if count == 1:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		count = 0
 
 func _physics_process(delta):
 	$RayCast3D.rotation.x = rotation_target_head
@@ -107,7 +119,7 @@ func _physics_process(delta):
 	if Engine.is_editor_hint():
 		return
 		
-	if Input.is_action_just_pressed("shoot") and shootAvailable:
+	if Input.is_action_just_pressed("shoot") and shootAvailable and not inHud:
 		
 		$RayCast3D.enabled = true
 		print($RayCast3D.get_collision_point())
@@ -139,8 +151,28 @@ func _physics_process(delta):
 		reset_head_bob(delta)
 #@warning_ignore("")
 func _process(delta):
-	$gamblingHud/pointerFinger.global_position = $gamblingHud.get_global_mouse_position()
-	$gamblingHud/handOverlay/wheel.rotate(1)
+	if Input.is_action_pressed("hud"):
+		inHud = true
+		count = 1
+	else:
+		inHud = false
+	
+	if buttonEntered == true and buttonLeft == false and Input.is_action_just_pressed("click"):
+		print("im pressed")
+		$gamblingHud/handOverlay.texture = pressedHand
+		await get_tree().create_timer(5).timeout
+		$gamblingHud/handOverlay.texture = hand
+	
+	if inHud:
+		Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+		var tween = create_tween()
+		tween.tween_property($gamblingHud/handOverlay, "global_position", Vector2(577, 323), 1)
+		$gamblingHud/pointerFinger.global_position = $gamblingHud.get_global_mouse_position()
+		$gamblingHud/handOverlay/wheel.rotate(1)
+	else:
+		returnMouseMode()
+		var tween = create_tween()
+		tween.tween_property($gamblingHud/handOverlay, "global_position", Vector2(-575, 323), 1)
 	
 	if Engine.is_editor_hint(): 
 		return
@@ -279,4 +311,17 @@ func _on_shoot_timer_timeout() -> void:
 	$explosion.visible = false
 	$Control/shoot.visible = false
 	$Control/gun.visible = true
+	pass # Replace with function body.
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	print("im in")
+	buttonLeft = false
+	buttonEntered = true
+
+
+
+func _on_area_2d_area_exited(area: Area2D) -> void:
+	buttonEntered = false
+	buttonLeft = true
 	pass # Replace with function body.

@@ -72,3 +72,18 @@ func _on_place_timer_timeout():
 	await get_tree().create_timer(3).timeout
 	
 	explode_bomb()
+
+func take_damage(damage):
+	HEALTH -= damage
+	$Sprite3D.texture = load("res://images/bomb_damage.png")
+	$Sprite3D.modulate = Color(255, 60, 60)
+	SPEED *= 0.75
+	
+	await get_tree().create_timer(0.5).timeout
+	
+	if HEALTH <= 0:
+		get_parent().remove_child(self)
+	else:
+		$Sprite3D.texture = load("res://images/clean_bomber_sprite.png")
+		$Sprite3D.modulate = Color(255, 255, 255)
+		SPEED /= 0.75

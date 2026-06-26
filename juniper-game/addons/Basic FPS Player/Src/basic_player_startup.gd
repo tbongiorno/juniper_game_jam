@@ -311,7 +311,17 @@ func _on_shoot_timer_timeout() -> void:
 	$explosion.visible = false
 	$Control/shoot.visible = false
 	$Control/gun.visible = true
-	pass # Replace with function body.
+	
+	var space_state = get_world_3d().direct_space_state
+	var query = PhysicsRayQueryParameters3D.create(global_position, self.position)
+	query.exclude = [self]
+	var result = space_state.intersect_ray(query)
+	
+	print(result)
+	print("TESTING")
+	#if result.name != "CsgBox3D" and result.name != "bullet" and result.name != "bomb":
+	#	print(result.name)
+	#	result.take_damage()
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:

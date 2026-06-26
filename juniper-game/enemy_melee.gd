@@ -31,3 +31,18 @@ func set_add_speed(speed):
 func _on_melee_area_body_entered(body):
 	if body.name == "player":
 		target.damage_player(DAMAGE)
+
+func take_damage(damage):
+	HEALTH -= damage
+	$Sprite3D.texture = load("res://images/melee_damage.png")
+	$Sprite3D.modulate = Color(255, 60, 60)
+	SPEED *= 0.75
+	
+	await get_tree().create_timer(0.5).timeout
+	
+	if HEALTH <= 0:
+		get_parent().remove_child(self)
+	else:
+		$Sprite3D.texture = load("res://images/clean_melee_sprite.png")
+		$Sprite3D.modulate = Color(255, 255, 255)
+		SPEED /= 0.75

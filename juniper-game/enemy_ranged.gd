@@ -51,3 +51,18 @@ func _on_bullet_body_entered(body):
 
 func set_add_speed(speed):
 	add_speed = speed
+
+func take_damage(damage):
+	HEALTH -= damage
+	$Sprite3D.texture = load("res://images/ranged_damage.png")
+	$Sprite3D.modulate = Color(255, 60, 60)
+	SPEED *= 0.75
+	
+	await get_tree().create_timer(0.5).timeout
+	
+	if HEALTH <= 0:
+		get_parent().remove_child(self)
+	else:
+		$Sprite3D.texture = load("res://images/clean_ranged_sprite.png")
+		$Sprite3D.modulate = Color(255, 255, 255)
+		SPEED /= 0.75

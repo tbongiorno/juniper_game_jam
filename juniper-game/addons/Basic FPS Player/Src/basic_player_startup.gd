@@ -1,6 +1,7 @@
 @tool
 extends CharacterBody3D
 
+
 var BasicFPSPlayerScene : PackedScene = preload("basic_player_head.tscn")
 var addedHead = false
 
@@ -25,9 +26,11 @@ func _enter_tree():
 @export_subgroup("Settings")
 @export var SPEED := 5.0
 @export var ACCEL := 50.0
-@export var IN_AIR_SPEED := 3.0
-@export var IN_AIR_ACCEL := 5.0
+@export var IN_AIR_SPEED := 5.0
+@export var IN_AIR_ACCEL := 70.0
 @export var JUMP_VELOCITY := 4.5
+@export @onready var current_bhop_frames = 0
+
 @export_subgroup("Head Bob")
 @export var HEAD_BOB := true
 @export var HEAD_BOB_FREQUENCY := 0.3
@@ -59,6 +62,11 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var speed = SPEED
 var accel = ACCEL
 
+var bhopBool = false
+
+var oldVelocity
+var slideCooldown
+
 # Used when lerping rotation to reduce stuttering when moving the mouse
 var rotation_target_player : float
 var rotation_target_head : float
@@ -70,6 +78,8 @@ var head_start_pos : Vector3
 var tick = 0
 
 func _ready():
+	set_process_input(not Engine.is_editor_hint())
+	
 	if Engine.is_editor_hint():
 		return
 
@@ -95,8 +105,14 @@ func _physics_process(delta):
 		if velocity && is_on_floor():
 			head_bob_motion()
 		reset_head_bob(delta)
-
+#@warning_ignore("")
 func _process(delta):
+	if Engine.is_editor_hint(): 
+		return
+	
+	if Input.is_action_just_pressed("exit"):
+		get_tree().quit()
+	
 	if Engine.is_editor_hint():
 		return
 
@@ -133,6 +149,26 @@ func rotate_player(delta):
 		$Head.quaternion = Quaternion(Vector3.RIGHT, rotation_target_head)
 	
 func move_player(delta):
+	if current_bhop_frames == 0:
+		SPEED = 5
+		ACCEL = 50
+		IN_AIR_ACCEL = 80
+		IN_AIR_SPEED = 5
+	elif current_bhop_frames == 1:
+		SPEED = 8
+		ACCEL = 60
+		IN_AIR_ACCEL = 90
+		IN_AIR_SPEED = 8
+	elif current_bhop_frames == 2:
+		SPEED = 10
+		ACCEL = 80
+		IN_AIR_ACCEL = 120
+		IN_AIR_SPEED = 10
+	elif current_bhop_frames > 2:
+		SPEED = 15
+		ACCEL = 100
+		IN_AIR_ACCEL = 130
+		IN_AIR_SPEED = 15
 	# Check if not on floor
 	if not is_on_floor():
 		# Reduce speed and accel
@@ -145,9 +181,20 @@ func move_player(delta):
 		speed = SPEED
 		accel = ACCEL
 
+	# hanles the slide
+	if Input.is_action_just_pressed("slide") and not slideCooldown:
+		slideCooldown = true
+		oldVelocity = SPEED
+		SPEED = SPEED * 2
+		$SlideTimer.start(1)
+		
 	# Handle Jump.
 	if Input.is_action_just_pressed(KEY_BIND_JUMP) and is_on_floor():
+		$bhopTimer.start(1.35)
+		current_bhop_frames = current_bhop_frames + 1
+		print(current_bhop_frames)
 		velocity.y = JUMP_VELOCITY
+	
 
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector(KEY_BIND_LEFT, KEY_BIND_RIGHT, KEY_BIND_UP, KEY_BIND_DOWN)
@@ -169,3 +216,15 @@ func reset_head_bob(delta):
 	if $Head.position == head_start_pos:
 		pass
 	$Head.position = lerp($Head.position, head_start_pos, 2 * (1/HEAD_BOB_FREQUENCY) * delta)
+
+
+func _on_slide_timer_timeout() -> void:
+	SPEED = oldVelocity
+	slideCooldown = false
+	pass # Replace with function body.
+
+
+func _on_bhop_timer_timeout() -> void:
+	current_bhop_frames = 0
+	print("FLIP IT RESET BOUNCE")
+	pass # Replace with function body.

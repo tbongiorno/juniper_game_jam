@@ -14,6 +14,11 @@ sky = SubResource("Sky_h2yge")
 
 [node name="player" parent="." unique_id=1453004515 instance=ExtResource("1_ig7tw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1149683, 0)
+SPEED = 5.0
+ACCEL = 50.0
+IN_AIR_SPEED = 7.5
+IN_AIR_ACCEL = 70.0
+JUMP_VELOCITY = 5.0
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1101560139]
 use_collision = true

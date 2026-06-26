@@ -5,6 +5,8 @@ extends CharacterBody3D
 var BasicFPSPlayerScene : PackedScene = preload("basic_player_head.tscn")
 var addedHead = false
 
+var rand = RandomNumberGenerator
+
 var buttonEntered = false
 var buttonLeft = false
 
@@ -15,6 +17,8 @@ var shootAvailable = true
 signal damageSignal
 
 var inHud = false
+
+var wheelWinner = $gamblingHud/handOverlay/wheel/EnemySpawner1
 
 func _enter_tree():
 	
@@ -115,7 +119,6 @@ func _physics_process(delta):
 	$RayCast3D.rotation.x = rotation_target_head
 	$RayCast3D.position = head_start_pos
 	
-	
 	if Engine.is_editor_hint():
 		return
 		
@@ -160,6 +163,7 @@ func _process(delta):
 	if buttonEntered == true and buttonLeft == false and Input.is_action_just_pressed("click"):
 		print("im pressed")
 		$gamblingHud/handOverlay.texture = pressedHand
+		rotateWheel()
 		await get_tree().create_timer(5).timeout
 		$gamblingHud/handOverlay.texture = hand
 	
@@ -168,7 +172,6 @@ func _process(delta):
 		var tween = create_tween()
 		tween.tween_property($gamblingHud/handOverlay, "global_position", Vector2(577, 323), 1)
 		$gamblingHud/pointerFinger.global_position = $gamblingHud.get_global_mouse_position()
-		$gamblingHud/handOverlay/wheel.rotate(1)
 	else:
 		returnMouseMode()
 		var tween = create_tween()
@@ -283,6 +286,14 @@ func reset_head_bob(delta):
 	if $Head.position == head_start_pos:
 		pass
 	$Head.position = lerp($Head.position, head_start_pos, 2 * (1/HEAD_BOB_FREQUENCY) * delta)
+	
+	
+func rotateWheel():
+	var rotateTween = create_tween()
+	var randi = randi_range(100, 360)
+	rotateTween.tween_property($gamblingHud/handOverlay/wheel, "rotation", $gamblingHud/handOverlay/wheel.rotation + randi, 8).set_trans(Tween.TRANS_SINE)
+	await rotateTween.finished
+	print(wheelWinner)
 
 
 func _on_slide_timer_timeout() -> void:
@@ -334,4 +345,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	buttonEntered = false
 	buttonLeft = true
+	pass # Replace with function body.
+
+
+func _on_area_2d_area_spinner_hand_entered(area: Area2D) -> void:
+	wheelWinner = area
 	pass # Replace with function body.

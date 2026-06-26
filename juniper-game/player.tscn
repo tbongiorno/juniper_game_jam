@@ -17,6 +17,9 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_dw050"]
 radius = 105.23308
 
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_b26j0"]
+length = 335.4839
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nvl01"]
 size = Vector2(75.5, 65.5)
 
@@ -99,15 +102,67 @@ texture = ExtResource("5_dw050")
 
 [node name="wheel" type="Sprite2D" parent="gamblingHud/handOverlay" unique_id=2144053916]
 position = Vector2(-178, 39)
-rotation = 46543.0
 texture = ExtResource("6_b26j0")
 offset = Vector2(180, -40)
+
+[node name="Area2D" type="Area2D" parent="gamblingHud/handOverlay/wheel" unique_id=1671865638]
+
+[node name="EnemySpawner1" type="CollisionPolygon2D" parent="gamblingHud/handOverlay/wheel/Area2D" unique_id=233450767]
+position = Vector2(-10.680176, -153.88934)
+polygon = PackedVector2Array(-99.71362, -107.005615, -259.82208, 140.45813, 6.2110596, 156.34393)
+
+[node name="Area2D2" type="Area2D" parent="gamblingHud/handOverlay/wheel" unique_id=638552006]
+
+[node name="FasterFireRate" type="CollisionPolygon2D" parent="gamblingHud/handOverlay/wheel/Area2D2" unique_id=1503215598]
+position = Vector2(-10.680176, -153.88934)
+polygon = PackedVector2Array(-163.4483, 370.12112, -258.2679, 142.0658, 4.3032837, 156.94421)
+
+[node name="Area2D3" type="Area2D" parent="gamblingHud/handOverlay/wheel" unique_id=89148074]
+
+[node name="MoreMaxHealth" type="CollisionPolygon2D" parent="gamblingHud/handOverlay/wheel/Area2D3" unique_id=1386214081]
+position = Vector2(-10.680176, -153.88934)
+polygon = PackedVector2Array(-93.79706, -101.52887, 122.60077, -86.79889, 7.5185547, 153.83588)
+
+[node name="Area2D4" type="Area2D" parent="gamblingHud/handOverlay/wheel" unique_id=142724304]
+
+[node name="bhopActivate" type="CollisionPolygon2D" parent="gamblingHud/handOverlay/wheel/Area2D4" unique_id=1051264811]
+position = Vector2(-10.680237, -153.88934)
+polygon = PackedVector2Array(124.208435, -88.35309, 270.14008, 72.25183, 9.019226, 158.60535)
+
+[node name="Area2D5" type="Area2D" parent="gamblingHud/handOverlay/wheel" unique_id=99007562]
+
+[node name="SpeedIncrease" type="CollisionPolygon2D" parent="gamblingHud/handOverlay/wheel/Area2D5" unique_id=1599140684]
+position = Vector2(17.755371, -133.48322)
+polygon = PackedVector2Array(242.00458, 52.79956, 208.58307, 289.75525, -19.716553, 137.24524)
+
+[node name="Area2D6" type="Area2D" parent="gamblingHud/handOverlay/wheel" unique_id=1936447915]
+
+[node name="EnemySpawner2" type="CollisionPolygon2D" parent="gamblingHud/handOverlay/wheel/Area2D6" unique_id=1868791914]
+position = Vector2(-141.06952, 38.09668)
+polygon = PackedVector2Array(197.49872, 234.53625, -32.4588, 180.04285, 137.44727, -29.618652)
+
+[node name="Area2D7" type="Area2D" parent="gamblingHud/handOverlay/wheel" unique_id=1360818451]
+
+[node name="RocketJump" type="CollisionPolygon2D" parent="gamblingHud/handOverlay/wheel/Area2D7" unique_id=1179723341]
+polygon = PackedVector2Array(226.33838, 156.2721, 57.382996, 272.3329, -4.1691895, 3.4084473)
 
 [node name="Area2D" type="Area2D" parent="gamblingHud/handOverlay" unique_id=1720764881]
 position = Vector2(228, 62)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="gamblingHud/handOverlay/Area2D" unique_id=1634987384]
 shape = SubResource("CircleShape2D_dw050")
+
+[node name="spinnerHand" type="Sprite2D" parent="gamblingHud/handOverlay" unique_id=793329532]
+position = Vector2(-162, -207)
+scale = Vector2(0.15173914, 0.14307693)
+texture = ExtResource("7_n7ghd")
+flip_v = true
+
+[node name="Area2D" type="Area2D" parent="gamblingHud/handOverlay/spinnerHand" unique_id=967747815]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gamblingHud/handOverlay/spinnerHand/Area2D" unique_id=1036997032]
+position = Vector2(26.361029, -321.50537)
+shape = SubResource("SeparationRayShape2D_b26j0")
 
 [node name="pointerFinger" type="Sprite2D" parent="gamblingHud" unique_id=1413915682]
 position = Vector2(548.04504, 241.89944)
@@ -143,6 +198,7 @@ stream = ExtResource("9_b26j0")
 
 [connection signal="area_entered" from="gamblingHud/handOverlay/Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="gamblingHud/handOverlay/Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="gamblingHud/handOverlay/spinnerHand/Area2D" to="." method="_on_area_2d_area_spinner_hand_entered"]
 [connection signal="timeout" from="SlideTimer" to="." method="_on_slide_timer_timeout"]
 [connection signal="timeout" from="bhopTimer" to="." method="_on_bhop_timer_timeout"]
 [connection signal="timeout" from="shootTimer" to="." method="_on_shoot_timer_timeout"]

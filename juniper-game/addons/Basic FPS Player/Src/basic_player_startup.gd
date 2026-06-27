@@ -18,7 +18,7 @@ signal damageSignal
 
 var inHud = false
 
-var wheelWinner = $gamblingHud/handOverlay/wheel/EnemySpawner1
+var wheelWinner = null
 
 func _enter_tree():
 	
@@ -82,6 +82,12 @@ var bhopBool = false
 var oldVelocity
 var slideCooldown
 
+var bhopUnlocked = false
+var rocketShotUnlocked = false
+
+var fireRate = 1
+
+
 # Used when lerping rotation to reduce stuttering when moving the mouse
 var rotation_target_player : float
 var rotation_target_head : float
@@ -144,7 +150,7 @@ func _physics_process(delta):
 		
 		var point = $RayCast3D.get_collision_point()
 		$explosion.global_position = point
-		print($explosion.global_position)
+
 		$explosion.visible = true
 		$Control/gun.visible = false
 		$Control/shoot.visible = true
@@ -154,12 +160,14 @@ func _physics_process(delta):
 			#if body.name.left(1) == "e":
 				#points += body.take_damage(damage)
 		
+		if rocketShotUnlocked == true:
+			if global_position.distance_to($explosion.global_position) <= 1.5:
+				velocity += Vector3(0, 10, 0)
 		
-		if global_position.distance_to($explosion.global_position) <= 1.5:
-			velocity += Vector3(0, 10, 0)
+		$shootTimer.start(fireRate)
+		await get_tree().create_timer(.1).timeout
+		$explosion.visible = false
 		
-		$shootTimer.start()
-		shootAvailable = false
 		
 	
 	# Increment player tick, used in head bob motion
@@ -191,11 +199,15 @@ func _process(delta):
 	
 	if inHud:
 		Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+		$Control.visible = false
+		$gamblingHud/pointerFinger.visible = true
 		var tween = create_tween()
 		tween.tween_property($gamblingHud/handOverlay, "global_position", Vector2(577, 323), 1)
 		$gamblingHud/pointerFinger.global_position = $gamblingHud.get_global_mouse_position()
 		$gamblingHud/handOverlay/wheel.rotate(1)
 	else:
+		$Control.visible = true
+		$gamblingHud/pointerFinger.visible = false
 		returnMouseMode()
 		var tween = create_tween()
 		tween.tween_property($gamblingHud/handOverlay, "global_position", Vector2(-575, 323), 1)
@@ -242,26 +254,27 @@ func rotate_player(delta):
 		$Head.quaternion = Quaternion(Vector3.RIGHT, rotation_target_head)
 	
 func move_player(delta):
-	if current_bhop_frames == 0:
-		SPEED = 5
-		ACCEL = 50
-		IN_AIR_ACCEL = 80
-		IN_AIR_SPEED = 5
-	elif current_bhop_frames == 1:
-		SPEED = 8
-		ACCEL = 60
-		IN_AIR_ACCEL = 90
-		IN_AIR_SPEED = 8
-	elif current_bhop_frames == 2:
-		SPEED = 10
-		ACCEL = 80
-		IN_AIR_ACCEL = 120
-		IN_AIR_SPEED = 10
-	elif current_bhop_frames > 2:
-		SPEED = 15
-		ACCEL = 100
-		IN_AIR_ACCEL = 130
-		IN_AIR_SPEED = 15
+	if bhopUnlocked:
+		if current_bhop_frames == 0:
+			SPEED = 5
+			ACCEL = 50
+			IN_AIR_ACCEL = 80
+			IN_AIR_SPEED = 5
+		elif current_bhop_frames == 1:
+			SPEED = 8
+			ACCEL = 60
+			IN_AIR_ACCEL = 90
+			IN_AIR_SPEED = 8
+		elif current_bhop_frames == 2:
+			SPEED = 10
+			ACCEL = 80
+			IN_AIR_ACCEL = 120
+			IN_AIR_SPEED = 10
+		elif current_bhop_frames > 2:
+			SPEED = 15
+			ACCEL = 100
+			IN_AIR_ACCEL = 130
+			IN_AIR_SPEED = 15
 	# Check if not on floor
 	if not is_on_floor():
 		# Reduce speed and accel
@@ -316,7 +329,26 @@ func rotateWheel():
 	var randi = randi_range(100, 360)
 	rotateTween.tween_property($gamblingHud/handOverlay/wheel, "rotation", $gamblingHud/handOverlay/wheel.rotation + randi, 8).set_trans(Tween.TRANS_SINE)
 	await rotateTween.finished
-	print(wheelWinner)
+	if wheelWinner == $gamblingHud/handOverlay/wheel/Area2D4/bhopActivate:
+		if bhopUnlocked == false:
+			bhopUnlocked = true
+		else:
+			get_parent().get_node("enemy_timer").start(.1)
+	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D2:
+		fireRate += 5
+	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D3:
+		health += 10
+	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D5:
+		SPEED = 6
+	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D:
+		get_parent().get_node("enemy_timer").start(.1)
+	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D6:
+		get_parent().get_node("enemy_timer").start(.1)
+	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D7:
+		if rocketShotUnlocked == false:
+			rocketShotUnlocked = true
+		else:
+			get_parent().get_node("enemy_timer").start(.1)
 
 
 func _on_slide_timer_timeout() -> void:
@@ -342,7 +374,6 @@ func damage_player(damage):
 
 func _on_shoot_timer_timeout() -> void:
 	shootAvailable =  true
-	$explosion.visible = false
 	$Control/shoot.visible = false
 	$Control/gun.visible = true
 

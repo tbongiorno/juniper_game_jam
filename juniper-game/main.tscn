@@ -2,6 +2,11 @@
 
 [ext_resource type="Script" uid="uid://csk27l7b4ldem" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://t6gn8pa0t1x" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="FontFile" uid="uid://bx265gfv6645v" path="res://bastion_3/Bastion.otf" id="3_h2yge"]
+[ext_resource type="AudioStream" uid="uid://cdwawtcieai0q" path="res://sounds/lesiakower-sector-unknown-374596.mp3" id="4_1bvp3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+specular_mode = 1
 
 [sub_resource type="Sky" id="Sky_h2yge"]
 
@@ -15,7 +20,16 @@ size = Vector3(43.97397, 1, 43.54065)
 [sub_resource type="SphereShape3D" id="SphereShape3D_0xm2m"]
 radius = 1.9856836
 
+[sub_resource type="LabelSettings" id="LabelSettings_1bvp3"]
+font = ExtResource("3_h2yge")
+font_size = 60
+
+[sub_resource type="LabelSettings" id="LabelSettings_h2yge"]
+font = ExtResource("3_h2yge")
+font_size = 281
+
 [node name="main" type="Node3D" unique_id=217003159]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5373306, 0, 0)
 script = ExtResource("1_1bvp3")
 
 [node name="player" parent="." unique_id=1453004515 instance=ExtResource("1_ig7tw")]
@@ -28,6 +42,7 @@ JUMP_VELOCITY = 5.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 use_collision = true
 size = Vector3(50, 1, 50)
+material = SubResource("StandardMaterial3D_h2yge")
 
 [node name="enemies" type="Node3D" parent="." unique_id=1537547557]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.731157, 2.7633348, 0)
@@ -63,5 +78,67 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.13654, 2.0017822, -5.163206
 shape = SubResource("SphereShape3D_0xm2m")
 debug_color = Color(0.93506, 1.92523e-05, 0.640053, 0.41960785)
 
+[node name="startScreen" type="Control" parent="." unique_id=719974401]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="startScreen" unique_id=1335542147]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Button" type="Button" parent="startScreen" unique_id=893251730]
+layout_mode = 0
+offset_left = 382.0
+offset_top = 285.0
+offset_right = 783.0
+offset_bottom = 360.0
+
+[node name="Label" type="Label" parent="startScreen/Button" unique_id=1612632800]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 401.0
+offset_bottom = 77.0
+text = "START"
+label_settings = SubResource("LabelSettings_1bvp3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="startScreen" unique_id=2127945420]
+
+[node name="endScreen" type="Control" parent="." unique_id=1084118548]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="endScreen" unique_id=1303537531]
+layout_mode = 0
+offset_right = 1151.0
+offset_bottom = 647.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="endScreen/ColorRect" unique_id=1376242843]
+layout_mode = 0
+offset_left = 142.0
+offset_top = 135.0
+offset_right = 1036.0
+offset_bottom = 445.0
+text = "YOU DIED"
+label_settings = SubResource("LabelSettings_h2yge")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="musicPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1960159641]
+stream = ExtResource("4_1bvp3")
+volume_db = -29.226
+attenuation = 0.0013810707
+max_polyphony = 2
+panning_strength = 1.71
+
 [connection signal="timeout" from="speed_timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="enemy_timer" to="." method="_on_enemy_timer_timeout"]
+[connection signal="pressed" from="startScreen/Button" to="." method="_on_button_pressed"]

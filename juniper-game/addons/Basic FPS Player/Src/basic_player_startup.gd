@@ -95,6 +95,8 @@ var rotation_target_head : float
 # Used when bobing head
 var head_start_pos : Vector3
 
+var canSpin = true
+
 # Current player tick, used in head bob calculation
 var tick = 0
 
@@ -124,101 +126,138 @@ func returnMouseMode():
 	pass
 
 func _physics_process(delta):
-	$RayCast3D.rotation.x = rotation_target_head
-	$RayCast3D.position = head_start_pos
-	
-	#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	
-	
-	
-	if Engine.is_editor_hint():
-		return
+	if health >= 1:
+		$RayCast3D.rotation.x = rotation_target_head
+		$RayCast3D.position = head_start_pos
 		
-	if Input.is_action_just_pressed("shoot") and shootAvailable and not inHud:
-		shootAvailable = false
-		$RayCast3D.enabled = true
-		print($RayCast3D.get_collision_point())
+		#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		
 		
-		if $RayCast3D.get_collider() != null:
-			var collider = $RayCast3D.get_collider()
-			print(collider.name)
+		
+		if Engine.is_editor_hint():
+			return
+			
+		if Input.is_action_just_pressed("shoot") and shootAvailable and not inHud:
+			shootAvailable = false
+			$RayCast3D.enabled = true
+			print($RayCast3D.get_collision_point())
+			
+			
+			if $RayCast3D.get_collider() != null:
+				var collider = $RayCast3D.get_collider()
+				print(collider.name)
 
-			if collider.name.left(5) == "enemy":
-				points += collider.take_damage(damage)
-				print(points)
-				
-		if rocketShotUnlocked == true:
-			if global_position.distance_to($explosion.global_position) <= 1.5:
-				velocity += Vector3(0, 10, 0)
+				if collider.name.left(5) == "enemy":
+					points += collider.take_damage(damage)
+					print(points)
+					
+			if rocketShotUnlocked == true:
+				if global_position.distance_to($explosion.global_position) <= 1.5:
+					velocity += Vector3(0, 10, 0)
+			
+			if $RayCast3D.is_colliding():
+				var point = $RayCast3D.get_collision_point()
+				$explosion.global_position = point
+				print($explosion.global_position)
+				$explosion.visible = true
+				$Control/gun.visible = false
+				$Control/shoot.visible = true
+			
+			$shootTimer.start(fireRate)
+			await get_tree().create_timer(.1).timeout
+			$explosion.visible = false
+			
+			
 		
-		if $RayCast3D.is_colliding():
-			var point = $RayCast3D.get_collision_point()
-			$explosion.global_position = point
-			print($explosion.global_position)
-			$explosion.visible = true
-			$Control/gun.visible = false
-			$Control/shoot.visible = true
+		# Increment player tick, used in head bob motion
+		tick += 1
 		
-		$shootTimer.start(fireRate)
-		await get_tree().create_timer(.1).timeout
-		$explosion.visible = false
+		if UPDATE_PLAYER_ON_PHYS_STEP:
+			move_player(delta)
+			rotate_player(delta)
 		
-		
-	
-	# Increment player tick, used in head bob motion
-	tick += 1
-	
-	if UPDATE_PLAYER_ON_PHYS_STEP:
-		move_player(delta)
-		rotate_player(delta)
-	
-	if HEAD_BOB:
-		# Only move head when on the floor and moving
-		if velocity && is_on_floor():
-			head_bob_motion()
-		reset_head_bob(delta)
+		if HEAD_BOB:
+			# Only move head when on the floor and moving
+			if velocity && is_on_floor():
+				head_bob_motion()
+			reset_head_bob(delta)
 #@warning_ignore("")
-func _process(delta):
-	if Input.is_action_pressed("hud"):
-		inHud = true
-		count = 1
-	else:
-		inHud = false
-	
-	if buttonEntered == true and buttonLeft == false and Input.is_action_just_pressed("click"):
-		print("im pressed")
-		$gamblingHud/handOverlay.texture = pressedHand
-		rotateWheel()
-		await get_tree().create_timer(5).timeout
-		$gamblingHud/handOverlay.texture = hand
-	
-	if inHud:
-		Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
-		$Control.visible = false
-		$gamblingHud/pointerFinger.visible = true
-		var tween = create_tween()
-		tween.tween_property($gamblingHud/handOverlay, "global_position", Vector2(577, 323), 0.5)
-		$gamblingHud/pointerFinger.global_position = $gamblingHud.get_global_mouse_position()
-	else:
-		$Control.visible = true
-		$gamblingHud/pointerFinger.visible = false
-		returnMouseMode()
-		var tween = create_tween()
-		tween.tween_property($gamblingHud/handOverlay, "global_position", Vector2(-575, 323), 0.15)
-	
-	if Engine.is_editor_hint(): 
-		return
-	
-	if Input.is_action_just_pressed("exit"):
-		get_tree().quit()
-	
-	if Engine.is_editor_hint():
-		return
 
-	if !UPDATE_PLAYER_ON_PHYS_STEP:
-		move_player(delta)
-		rotate_player(delta)
+var i = 0
+func _process(delta):
+	if health < 1:
+		get_parent().get_node("endScreen").visible = true
+		get_parent().get_node("startScreen/ColorRect").color = Color.WHITE
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		var newTween = create_tween()
+		
+		newTween.tween_property($"../endScreen/ColorRect", "color", Color.BLACK	, 10)
+		if get_parent().get_node("enemies").get_child(i) != null:
+			get_parent().get_node("enemies").remove_child(i)
+			i = i + 1
+		else:
+			i = 0
+		
+		self.position = Vector3(0, 0, 0)
+		get_parent().get_node("endScreen").visible = false
+		get_parent().get_node("endScreen/ColorRect").color = Color.BLACK
+		get_parent().get_node("startScreen").visible = true
+		await newTween.finished
+		var bhopBool = false
+		var bhopUnlocked = false
+		var rocketShotUnlocked = false
+		var fireRate = 1
+		var canSpin = true
+		var tick = 0
+		var health = 100
+		var damage = 5
+		var points = 0
+		var count = 1
+		
+	else:
+	
+	
+		if Input.is_action_pressed("hud"):
+			inHud = true
+			count = 1
+		else:
+			inHud = false
+		
+		if buttonEntered == true and buttonLeft == false and Input.is_action_just_pressed("click") and canSpin:
+			print("im pressed")
+			canSpin = false
+			$gamblingHud/handOverlay.texture = pressedHand
+			rotateWheel()
+			await get_tree().create_timer(8).timeout
+			canSpin = true
+			$gamblingHud/handOverlay.texture = hand
+		
+		if inHud:
+			Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+			$Control.visible = false
+			$gamblingHud/pointerFinger.visible = true
+			var tween = create_tween()
+			tween.tween_property($gamblingHud/handOverlay, "global_position", Vector2(577, 323), 0.5)
+			$gamblingHud/pointerFinger.global_position = $gamblingHud.get_global_mouse_position()
+		else:
+			$Control.visible = true
+			$gamblingHud/pointerFinger.visible = false
+			returnMouseMode()
+			var tween = create_tween()
+			tween.tween_property($gamblingHud/handOverlay, "global_position", Vector2(-575, 323), 0.15)
+		
+		if Engine.is_editor_hint(): 
+			return
+		
+		if Input.is_action_just_pressed("exit"):
+			get_tree().quit()
+		
+		if Engine.is_editor_hint():
+			return
+
+		if !UPDATE_PLAYER_ON_PHYS_STEP:
+			move_player(delta)
+			rotate_player(delta)
 
 func _input(event):
 	if Engine.is_editor_hint():
@@ -250,6 +289,7 @@ func rotate_player(delta):
 	
 func move_player(delta):
 	if bhopUnlocked:
+		print("bhopping")
 		if current_bhop_frames == 0:
 			SPEED = 5
 			ACCEL = 50
@@ -323,18 +363,26 @@ func rotateWheel():
 	var rotateTween = create_tween()
 	var randi = randi_range(100, 360)
 	rotateTween.tween_property($gamblingHud/handOverlay/wheel, "rotation", $gamblingHud/handOverlay/wheel.rotation + randi, 8).set_trans(Tween.TRANS_SINE)
+	$AudioStreamPlayer2D.playing = true
 	await rotateTween.finished
-	if wheelWinner == $gamblingHud/handOverlay/wheel/Area2D4/bhopActivate:
+	if wheelWinner == $gamblingHud/handOverlay/wheel/Area2D4:
 		if bhopUnlocked == false:
 			bhopUnlocked = true
+			print("bhop unlocked")
 		else:
-			get_parent().get_node("enemy_timer").start(.1)
+			get_parent().get_node("enemy_timer").start(10)
 	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D2:
-		fireRate += 5
+		print("fire rate increased")
+		fireRate -= 5
 	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D3:
+		print("increased health")
 		health += 10
 	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D5:
-		SPEED = 6
+		print("speed increased")
+		if SPEED != 5:
+			SPEED = 6
+		else:
+			get_parent().get_node("enemy_timer").start(10)
 	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D:
 		get_parent().get_node("enemy_timer").start(.1)
 	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D6:
@@ -343,7 +391,7 @@ func rotateWheel():
 		if rocketShotUnlocked == false:
 			rocketShotUnlocked = true
 		else:
-			get_parent().get_node("enemy_timer").start(.1)
+			get_parent().get_node("enemy_timer").start(10)
 
 
 func _on_slide_timer_timeout() -> void:

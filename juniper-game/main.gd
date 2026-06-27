@@ -11,14 +11,22 @@ var bomb = load("res://enemy_bomb.tscn")
 var fly = load("res://enemy_fly.tscn")
 var brute = load("res://enemy_brute.tscn")
 
+var startScreen = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	spawn_area = $enemy_spawn_area
-	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	
+	if startScreen:
+		print("start")
+		var tween = create_tween()
+		$startScreen/Button.visible = false
+		tween.tween_property($startScreen/ColorRect, "color", Color.TRANSPARENT, 1)
+		await tween.finished
+		$musicPlayer.start()
 
 
 func spawn_enemy():
@@ -59,4 +67,9 @@ func _on_timer_timeout():
 
 func _on_enemy_timer_timeout():
 	spawn_enemy()
+	
+
+
+func _on_button_pressed() -> void:
+	startScreen = true
 	

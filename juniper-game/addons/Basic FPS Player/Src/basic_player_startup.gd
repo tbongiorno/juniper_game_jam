@@ -198,14 +198,14 @@ func _process(delta):
 		$Control.visible = false
 		$gamblingHud/pointerFinger.visible = true
 		var tween = create_tween()
-		tween.tween_property($gamblingHud/handOverlay, "global_position", Vector2(577, 323), 1)
+		tween.tween_property($gamblingHud/handOverlay, "global_position", Vector2(577, 323), 0.5)
 		$gamblingHud/pointerFinger.global_position = $gamblingHud.get_global_mouse_position()
 	else:
 		$Control.visible = true
 		$gamblingHud/pointerFinger.visible = false
 		returnMouseMode()
 		var tween = create_tween()
-		tween.tween_property($gamblingHud/handOverlay, "global_position", Vector2(-575, 323), 1)
+		tween.tween_property($gamblingHud/handOverlay, "global_position", Vector2(-575, 323), 0.15)
 	
 	if Engine.is_editor_hint(): 
 		return

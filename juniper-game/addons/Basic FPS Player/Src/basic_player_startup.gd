@@ -118,12 +118,7 @@ func _ready():
 	if CAPTURE_ON_START and not inHud:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	head_start_pos = $Head.position
-	
-	$Control/directions.text = "Hold Right Click To Gamble"
-	await get_tree().create_timer(1).timeout
-	var tween = get_tree().create_tween()
-	tween.tween_property($Control/directions, "visible_ratio", 0, 0.5)
-	
+
 func returnMouseMode():
 	if count == 1:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -143,6 +138,7 @@ func _physics_process(delta):
 			return
 			
 		if Input.is_action_just_pressed("shoot") and shootAvailable and not inHud:
+			$AudioStreamPlayer3D2.play()
 			shootAvailable = false
 			$RayCast3D.enabled = true
 			print($RayCast3D.get_collision_point())
@@ -152,7 +148,6 @@ func _physics_process(delta):
 				var collider = $RayCast3D.get_collider()
 				print(collider.name)
 
-<<<<<<< Updated upstream
 				if collider.name.left(5) == "enemy":
 					points += collider.take_damage(damage)
 					print(points)
@@ -173,19 +168,7 @@ func _physics_process(delta):
 			await get_tree().create_timer(.1).timeout
 			$explosion.visible = false
 			
-			$AudioStreamPlayer3D2.play()
-			await get_tree().create_timer(1)
-			$AudioStreamPlayer3D2.stop()
 			
-=======
-			if collider.name.left(5) == "enemy":
-				points += collider.take_damage(damage)
-				$Control/points.text = str(points)
-				
-		if rocketShotUnlocked == true:
-			if global_position.distance_to($explosion.global_position) <= 1.5:
-				velocity += Vector3(0, 10, 0)
->>>>>>> Stashed changes
 		
 		# Increment player tick, used in head bob motion
 		tick += 1
@@ -200,46 +183,6 @@ func _physics_process(delta):
 				head_bob_motion()
 			reset_head_bob(delta)
 #@warning_ignore("")
-<<<<<<< Updated upstream
-=======
-func _process(delta):
-	if Input.is_action_pressed("hud"):
-		inHud = true
-		count = 1
-		$Control/directions.text = ""
-	else:
-		inHud = false
-	
-	if buttonEntered == true and buttonLeft == false and Input.is_action_just_pressed("click"):
-		print("im pressed")
-		$gamblingHud/handOverlay.texture = pressedHand
-		rotateWheel()
-		await get_tree().create_timer(5).timeout
-		$gamblingHud/handOverlay.texture = hand
-	
-	if inHud:
-		Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
-		$Control.visible = false
-		$gamblingHud/pointerFinger.visible = true
-		var tween = create_tween()
-		tween.tween_property($gamblingHud/handOverlay, "global_position", Vector2(577, 323), 0.5)
-		$gamblingHud/pointerFinger.global_position = $gamblingHud.get_global_mouse_position()
-	else:
-		$Control.visible = true
-		$gamblingHud/pointerFinger.visible = false
-		returnMouseMode()
-		var tween = create_tween()
-		tween.tween_property($gamblingHud/handOverlay, "global_position", Vector2(-575, 323), 0.15)
-	
-	if Engine.is_editor_hint(): 
-		return
-	
-	if Input.is_action_just_pressed("exit"):
-		get_tree().quit()
-	
-	if Engine.is_editor_hint():
-		return
->>>>>>> Stashed changes
 
 var i = 0
 func _process(delta):
@@ -419,69 +362,39 @@ func reset_head_bob(delta):
 	
 func rotateWheel():
 	var rotateTween = create_tween()
-	
 	var randi = randi_range(100, 360)
 	rotateTween.tween_property($gamblingHud/handOverlay/wheel, "rotation", $gamblingHud/handOverlay/wheel.rotation + randi, 8).set_trans(Tween.TRANS_SINE)
-	$AudioStreamPlayer3D.playing = true
+	$AudioStreamPlayer2D.playing = true
 	await rotateTween.finished
-	$AudioStreamPlayer3D.playing = false
-	$AudioStreamPlayer2D.play()
+	$AudioStreamPlayer2D.playing = false
 	if wheelWinner == $gamblingHud/handOverlay/wheel/Area2D4:
 		if bhopUnlocked == false:
-			$reward.text = "UNLOCKED BHOP"
 			bhopUnlocked = true
 			print("bhop unlocked")
 		else:
-<<<<<<< Updated upstream
 			get_parent().get_node("enemy_timer").start(10)
 	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D2:
 		print("fire rate increased")
-		fireRate -= 5
-=======
-			$reward.text = "MORE ENEMIES"
-			get_parent().get_node("enemy_timer").start(.1)
-	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D2:
-		fireRate += 5
-		$reward.text = "FASTER FIRE RATE"
->>>>>>> Stashed changes
+		fireRate -= 0.1
 	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D3:
 		print("increased health")
 		health += 10
-		$reward.text = "INCREASED HEALTH"
 	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D5:
-<<<<<<< Updated upstream
 		print("speed increased")
 		if SPEED != 5:
 			SPEED = 6
 		else:
 			get_parent().get_node("enemy_timer").start(10)
-=======
-		SPEED = 6
-		$reward.text = "MOVE FASTER"
->>>>>>> Stashed changes
 	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D:
 		get_parent().get_node("enemy_timer").start(.1)
-		$reward.text = "MORE ENEMIES"
 	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D6:
 		get_parent().get_node("enemy_timer").start(.1)
-		$reward.text = "EVEN MORE ENEMIES"
 	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D7:
 		if rocketShotUnlocked == false:
-			$reward.text = "UNLOCKED ROCKET JUMP"
 			rocketShotUnlocked = true
 		else:
-<<<<<<< Updated upstream
 			get_parent().get_node("enemy_timer").start(10)
 
-=======
-			$reward.text = "MORE ENEMIES"
-			get_parent().get_node("enemy_timer").start(.1)
-	
-	$reward.visible_ratio = 1
-	await get_tree().create_timer(1).timeout
-	var tween = get_tree().create_tween()
-	tween.tween_property($reward, "visible_ratio", 0, 0.5)
->>>>>>> Stashed changes
 
 func _on_slide_timer_timeout() -> void:
 	SPEED = oldVelocity

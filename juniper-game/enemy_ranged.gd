@@ -10,6 +10,7 @@ var bullet_direction = null
 var HEALTH = 3
 var DAMAGE = 3
 var SPEED = 2.5
+var POINTS = 2
 
 var add_speed = 0
 
@@ -59,11 +60,12 @@ func take_damage(damage):
 	$Sprite3D.modulate = Color(255, 60, 60)
 	SPEED *= 0.75
 	
-	await get_tree().create_timer(0.5).timeout
-	
 	if HEALTH <= 0:
 		self.queue_free()
+		return POINTS
 	else:
+		await get_tree().create_timer(0.25).timeout
+		
 		$Sprite3D.texture = load("res://images/clean_range_sprite.png")
 		$Sprite3D.modulate = Color(255, 255, 255)
 		SPEED /= 0.75

@@ -95,6 +95,7 @@ var tick = 0
 # GAMEPLAY STUFF
 var health = 100
 var damage = 5
+var points = 0
 
 var count = 1
 
@@ -119,10 +120,10 @@ func returnMouseMode():
 func _physics_process(delta):
 	$RayCast3D.rotation.x = rotation_target_head
 	$RayCast3D.position = head_start_pos
-<<<<<<< HEAD
-	#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-=======
->>>>>>> 85e92881fb3be05da713eed49a712f8378d9d81d
+	
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
+	
 	
 	if Engine.is_editor_hint():
 		return
@@ -137,7 +138,8 @@ func _physics_process(delta):
 			print(collider.name)
 		
 			if collider.name == "enemy_melee" or collider.name == "enemy_ranged" or collider.name == "enemy_fly" or collider.name == "enemy_bomb" or collider.name == "enemy_brute":
-				collider.take_damage(damage)
+				points += collider.take_damage(damage)
+				print(points)
 		
 		
 		var point = $RayCast3D.get_collision_point()

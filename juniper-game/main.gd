@@ -14,7 +14,7 @@ var brute = load("res://enemy_brute.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	spawn_area = $enemy_spawn_area
-
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

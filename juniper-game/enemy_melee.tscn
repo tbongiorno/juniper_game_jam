@@ -4,14 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://byp25wj3kiav1" path="res://images/clean_melee_sprite.png" id="2_et1yx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2sfwx"]
-size = Vector3(1.2896118, 1.77565, 0.83078766)
+size = Vector3(1.7142487, 1.8676796, 1.6181917)
 
 [node name="enemy_melee" type="CharacterBody3D" unique_id=1775977917]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 script = ExtResource("1_qa0bm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=549836899]
-transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0.014457703, 0.84014696, -0.027604103)
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0.014457703, 0.7073931, -0.027604103)
 shape = SubResource("BoxShape3D_2sfwx")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1882234126]
@@ -21,7 +21,7 @@ texture = ExtResource("2_et1yx")
 [node name="hitbox" type="Area3D" parent="." unique_id=121877853]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="hitbox" unique_id=853792389]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7848169, 0.052635193)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1752294, 0.9805722, 0.013911287)
 shape = SubResource("BoxShape3D_2sfwx")
 
 [connection signal="body_entered" from="hitbox" to="." method="_on_melee_area_body_entered"]

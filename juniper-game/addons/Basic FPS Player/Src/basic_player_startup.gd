@@ -126,11 +126,10 @@ func returnMouseMode():
 	pass
 
 func _physics_process(delta):
+	
 	if health >= 1:
 		$RayCast3D.rotation.x = rotation_target_head
 		$RayCast3D.position = head_start_pos
-		
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		
 		
 		
@@ -429,6 +428,7 @@ func _on_bhop_timer_timeout() -> void:
 
 
 func damage_player(damage):
+	print("taking damage")
 	health -= damage
 	print(str(health))
 	if health <= 0:

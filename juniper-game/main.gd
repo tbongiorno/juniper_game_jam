@@ -22,7 +22,6 @@ func _ready():
 func _process(delta):
 	
 	if startScreen:
-		print("start")
 		var tween = create_tween()
 		$startScreen/Button.visible = false
 		tween.tween_property($startScreen/ColorRect, "color", Color.TRANSPARENT, 1)

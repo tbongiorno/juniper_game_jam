@@ -7,7 +7,7 @@
 size = Vector3(2.3032913, 1.7778015, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d6bkl"]
-size = Vector3(2.8218842, 2.300171, 1.2971802)
+size = Vector3(2.8218842, 2.8454285, 1.7097931)
 
 [node name="enemy_fly" type="CharacterBody3D" unique_id=443954869]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
@@ -24,7 +24,7 @@ texture = ExtResource("2_d6bkl")
 [node name="hitbox" type="Area3D" parent="." unique_id=585605154]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="hitbox" unique_id=946195487]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.053642273, 0.65008545, 0.013458252)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.053642273, 0.55570984, -0.0235672)
 shape = SubResource("BoxShape3D_d6bkl")
 
 [connection signal="body_entered" from="hitbox" to="." method="_on_fly_area_body_entered"]

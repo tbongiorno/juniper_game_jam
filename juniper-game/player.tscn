@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://drfpoduhdk64r" path="res://addons/Basic FPS Player/Src/basic_player_startup.gd" id="1_onrkg"]
 [ext_resource type="PackedScene" uid="uid://kmyakts4l64t" path="res://addons/Basic FPS Player/Src/basic_player_head.tscn" id="2_i3pqv"]
 [ext_resource type="Texture2D" uid="uid://c3grufnkd4m73" path="res://images/hub.png" id="3_hqtel"]
+[ext_resource type="FontFile" uid="uid://bk1t5l4d3qto1" path="res://Vipnagorgialla Bd.otf" id="3_n7ghd"]
+[ext_resource type="FontFile" uid="uid://c1w716if6job7" path="res://Vipnagorgialla Rg.otf" id="4_nvl01"]
 [ext_resource type="Texture2D" uid="uid://cqoihgu1kif4c" path="res://images/fire.png" id="4_sweqy"]
 [ext_resource type="Texture2D" uid="uid://djkpls72fptr1" path="res://images/big hand.png" id="5_dw050"]
 [ext_resource type="Texture2D" uid="uid://d3lsg1bv1dyrq" path="res://images/explosion.png" id="5_sweqy"]
@@ -15,6 +17,17 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_onrkg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_n7ghd"]
+font = ExtResource("3_n7ghd")
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_ivps1"]
+font = ExtResource("4_nvl01")
+
+[sub_resource type="LabelSettings" id="LabelSettings_nvl01"]
+font = ExtResource("4_nvl01")
+font_size = 50
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dw050"]
 radius = 105.23308
@@ -33,6 +46,7 @@ metadata/_custom_type_script = "uid://drfpoduhdk64r"
 [node name="Head" parent="." unique_id=2010756420 instance=ExtResource("2_i3pqv")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=72753906]
+visible = false
 mesh = SubResource("CapsuleMesh_onrkg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1229018859]
@@ -44,23 +58,26 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Label" type="Label" parent="Control" unique_id=641179227]
-visible = false
+[node name="points" type="Label" parent="Control" unique_id=641179227]
 layout_mode = 0
-offset_left = 905.0
-offset_top = 325.0
-offset_right = 986.0
-offset_bottom = 348.0
-text = "GUN HERE"
+offset_left = 276.0
+offset_top = 25.0
+offset_right = 876.0
+offset_bottom = 75.0
+text = "0"
+label_settings = SubResource("LabelSettings_n7ghd")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="Control" unique_id=1885889856]
-visible = false
+[node name="directions" type="Label" parent="Control" unique_id=1532586131]
 layout_mode = 0
-offset_left = 62.0
-offset_top = 303.0
-offset_right = 204.0
-offset_bottom = 326.0
-text = "Slot Machine Here"
+offset_left = 376.0
+offset_top = 200.0
+offset_right = 776.0
+offset_bottom = 350.0
+label_settings = SubResource("LabelSettings_ivps1")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="gun" type="Sprite2D" parent="Control" unique_id=1324941284]
 position = Vector2(577, 323)
@@ -73,29 +90,21 @@ texture = ExtResource("4_sweqy")
 
 [node name="crosshair" type="Sprite2D" parent="Control" unique_id=2116322776]
 
+[node name="reward" type="Label" parent="." unique_id=133240374]
+top_level = true
+offset_left = 376.0
+offset_top = 100.0
+offset_right = 776.0
+offset_bottom = 150.0
+label_settings = SubResource("LabelSettings_nvl01")
+horizontal_alignment = 1
+autowrap_mode = 2
+
 [node name="gamblingHud" type="Control" parent="." unique_id=1385350608]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="Label" type="Label" parent="gamblingHud" unique_id=392124481]
-visible = false
-layout_mode = 0
-offset_left = 905.0
-offset_top = 325.0
-offset_right = 986.0
-offset_bottom = 348.0
-text = "GUN HERE"
-
-[node name="Label2" type="Label" parent="gamblingHud" unique_id=246518379]
-visible = false
-layout_mode = 0
-offset_left = 62.0
-offset_top = 303.0
-offset_right = 204.0
-offset_bottom = 326.0
-text = "Slot Machine Here"
 
 [node name="handOverlay" type="Sprite2D" parent="gamblingHud" unique_id=1998529073]
 position = Vector2(-575, 323)

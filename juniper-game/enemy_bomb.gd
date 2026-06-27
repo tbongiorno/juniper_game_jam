@@ -8,7 +8,7 @@ var bomb_placed = false
 var HEALTH = 2
 var DAMAGE = 5
 var SPEED = 3
-var POINTS = 4
+var POINTS = 40
 
 var add_speed = 0
 

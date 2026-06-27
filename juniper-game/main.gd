@@ -56,7 +56,6 @@ func spawn_enemy():
 	
 	print(new_enemy.global_position)
 
-
 func _on_timer_timeout():
 	curr_add_speed += 0.2
 	$enemy_timer.stop()

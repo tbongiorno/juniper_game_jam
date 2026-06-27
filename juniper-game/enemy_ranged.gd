@@ -10,7 +10,7 @@ var bullet_direction = null
 var HEALTH = 3
 var DAMAGE = 3
 var SPEED = 2.5
-var POINTS = 2
+var POINTS = 20
 
 var add_speed = 0
 

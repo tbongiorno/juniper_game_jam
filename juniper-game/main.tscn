@@ -5,21 +5,6 @@
 [ext_resource type="FontFile" uid="uid://bx265gfv6645v" path="res://bastion_3/Bastion.otf" id="3_h2yge"]
 [ext_resource type="AudioStream" uid="uid://cdwawtcieai0q" path="res://sounds/lesiakower-sector-unknown-374596.mp3" id="4_1bvp3"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
-specular_mode = 1
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7mycd"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lquwl"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_272bh"]
-
 [sub_resource type="Sky" id="Sky_h2yge"]
 
 [sub_resource type="Environment" id="Environment_h2yge"]
@@ -32,7 +17,6 @@ size = Vector3(43.97397, 1, 43.54065)
 [sub_resource type="SphereShape3D" id="SphereShape3D_0xm2m"]
 radius = 1.9856836
 
-<<<<<<< Updated upstream
 [sub_resource type="LabelSettings" id="LabelSettings_1bvp3"]
 font = ExtResource("3_h2yge")
 font_size = 60
@@ -40,18 +24,25 @@ font_size = 60
 [sub_resource type="LabelSettings" id="LabelSettings_h2yge"]
 font = ExtResource("3_h2yge")
 font_size = 281
-=======
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5vw27"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+specular_mode = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lquwl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7mycd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_272bh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4c57u"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_efxa6"]
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kek77"]
->>>>>>> Stashed changes
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5vw27"]
 
 [node name="main" type="Node3D" unique_id=217003159]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5373306, 0, 0)
 script = ExtResource("1_1bvp3")
 
 [node name="player" parent="." unique_id=1453004515 instance=ExtResource("1_ig7tw")]
@@ -59,53 +50,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 IN_AIR_SPEED = 7.5
 IN_AIR_ACCEL = 70.0
 JUMP_VELOCITY = 5.0
-
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1101560139]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-use_collision = true
-<<<<<<< Updated upstream
-size = Vector3(50, 1, 50)
-material = SubResource("StandardMaterial3D_h2yge")
-=======
-size = Vector3(100, 1, 100)
-material = SubResource("StandardMaterial3D_0xm2m")
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=241474665]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 49, -50)
-use_collision = true
-size = Vector3(99, 100, 1)
-material = SubResource("StandardMaterial3D_7mycd")
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=328451106]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 99, 0)
-use_collision = true
-size = Vector3(100, 1, 100)
-material = SubResource("StandardMaterial3D_0xm2m")
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=412854774]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 49, 50)
-use_collision = true
-size = Vector3(99, 100, 1)
-material = SubResource("StandardMaterial3D_1bvp3")
-
-[node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=126534824]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 49, 0)
-use_collision = true
-size = Vector3(1, 100, 99)
-material = SubResource("StandardMaterial3D_h2yge")
-
-[node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=823221463]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 49, 0)
-use_collision = true
-size = Vector3(1, 100, 99)
-material = SubResource("StandardMaterial3D_lquwl")
-
-[node name="CSGBox3D8" type="CSGBox3D" parent="." unique_id=906553463]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -28.387527, 23.278694, 32.66659)
-use_collision = true
-size = Vector3(50, 1, 67.52002)
-material = SubResource("StandardMaterial3D_272bh")
->>>>>>> Stashed changes
 
 [node name="enemies" type="Node3D" parent="." unique_id=1537547557]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.731157, 2.7633348, 0)
@@ -152,7 +96,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.13654, 2.0017822, -5.163206
 shape = SubResource("SphereShape3D_0xm2m")
 debug_color = Color(0.93506, 1.92523e-05, 0.640053, 0.41960785)
 
-<<<<<<< Updated upstream
 [node name="startScreen" type="Control" parent="." unique_id=719974401]
 layout_mode = 3
 anchors_preset = 0
@@ -213,32 +156,60 @@ volume_db = -24.893
 attenuation = 0.0013810707
 max_polyphony = 2
 panning_strength = 1.71
-=======
-[node name="CSGBox3D9" type="CSGBox3D" parent="." unique_id=1142369317]
-transform = Transform3D(0.5, 0, 0, 0, 0.40718442, 0.29017383, 0, -0.29017383, 0.40718442, -30.96347, 10.228111, -2.1545334)
-use_collision = true
-size = Vector3(49.48938, 1, 89.913025)
-material = SubResource("StandardMaterial3D_5vw27")
 
-[node name="CSGBox3D10" type="CSGBox3D" parent="." unique_id=1105639098]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 37.66269, 11.663746, -27.924164)
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1101560139]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.013412476, -1, 0.07163048)
 use_collision = true
-size = Vector3(50, 50, 100)
+size = Vector3(80, 1, 80)
+material = SubResource("StandardMaterial3D_h2yge")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1460784248]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 39, 40)
+use_collision = true
+size = Vector3(80, 80, 1)
+material = SubResource("StandardMaterial3D_1bvp3")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1873282633]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 39, -40)
+use_collision = true
+size = Vector3(80, 80, 1)
+material = SubResource("StandardMaterial3D_lquwl")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=930434406]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 39, 0)
+use_collision = true
+size = Vector3(1, 80, 80)
+material = SubResource("StandardMaterial3D_7mycd")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=1240412747]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 39, 0)
+use_collision = true
+size = Vector3(1, 80, 80)
+material = SubResource("StandardMaterial3D_272bh")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=311053818]
+transform = Transform3D(0.49999994, -0.8660254, 0, 0.8660254, 0.49999994, 0, 0, 0, 1, 5.624778, 8.138031, -29.30561)
+use_collision = true
+size = Vector3(1, 36.760864, 20.706543)
 material = SubResource("StandardMaterial3D_4c57u")
 
-[node name="CSGBox3D11" type="CSGBox3D" parent="." unique_id=1656049294]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -32.194126, 7.7509365, 35.908554)
+[node name="CSGBox3D7" type="CSGBox3D" parent="." unique_id=418398292]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -24.878496, 17.268703, -29.243294)
 use_collision = true
-size = Vector3(10, 62.689575, 10)
-material = SubResource("StandardMaterial3D_efxa6")
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=798512714]
-transform = Transform3D(0.5, 0, 0, 0, 0.3299156, 0.3757069, 0, -0.3757069, 0.3299156, 37.909157, 7.4794693, 10.659157)
-use_collision = true
-radius = 6.38916
-height = 82.390015
+size = Vector3(29.730042, 20.890472, 1)
 material = SubResource("StandardMaterial3D_kek77")
->>>>>>> Stashed changes
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=2012228846]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.051043, 8.296997, -27.662191)
+use_collision = true
+radius = 2.5
+height = 18.593994
+material = SubResource("StandardMaterial3D_5vw27")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="." unique_id=861278796]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 79, 0)
+use_collision = true
+size = Vector3(80, 1, 80)
 
 [connection signal="timeout" from="speed_timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="enemy_timer" to="." method="_on_enemy_timer_timeout"]

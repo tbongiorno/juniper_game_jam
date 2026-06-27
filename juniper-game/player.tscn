@@ -27,7 +27,7 @@ font = ExtResource("4_nvl01")
 
 [sub_resource type="LabelSettings" id="LabelSettings_nvl01"]
 font = ExtResource("4_nvl01")
-font_size = 50
+font_size = 30
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dw050"]
 radius = 105.23308
@@ -75,6 +75,7 @@ offset_left = 376.0
 offset_top = 200.0
 offset_right = 776.0
 offset_bottom = 350.0
+text = "HOLD RIGHT CLICK TO GAMBLE"
 label_settings = SubResource("LabelSettings_ivps1")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -209,11 +210,12 @@ stream = ExtResource("9_b26j0")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=249472108]
 stream = ExtResource("10_nvl01")
-volume_db = -10.0
+volume_db = -15.0
 parameters/looping = true
 
 [node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="." unique_id=1629209128]
 stream = ExtResource("11_ivps1")
+volume_db = -20.0
 
 [connection signal="area_entered" from="gamblingHud/handOverlay/Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="gamblingHud/handOverlay/Area2D" to="." method="_on_area_2d_area_exited"]

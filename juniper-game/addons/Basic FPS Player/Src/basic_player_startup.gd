@@ -130,7 +130,7 @@ func _physics_process(delta):
 		$RayCast3D.rotation.x = rotation_target_head
 		$RayCast3D.position = head_start_pos
 		
-		#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		
 		
 		
@@ -182,7 +182,6 @@ func _physics_process(delta):
 			if velocity && is_on_floor():
 				head_bob_motion()
 			reset_head_bob(delta)
-#@warning_ignore("")
 
 var i = 0
 func _process(delta):
@@ -361,39 +360,60 @@ func reset_head_bob(delta):
 	
 	
 func rotateWheel():
+	if $Control/directions.visible_ratio == 1:
+		await get_tree().create_timer(1).timeout
+		var tween = get_tree().create_tween()
+		tween.tween_property($Control/directions, "visible_ratio", 0, 0.5)
+
 	var rotateTween = create_tween()
 	var randi = randi_range(100, 360)
 	rotateTween.tween_property($gamblingHud/handOverlay/wheel, "rotation", $gamblingHud/handOverlay/wheel.rotation + randi, 8).set_trans(Tween.TRANS_SINE)
-	$AudioStreamPlayer2D.playing = true
+	$AudioStreamPlayer3D.playing = true
 	await rotateTween.finished
-	$AudioStreamPlayer2D.playing = false
+	$AudioStreamPlayer3D.playing = false
+	$AudioStreamPlayer2D.play()
 	if wheelWinner == $gamblingHud/handOverlay/wheel/Area2D4:
 		if bhopUnlocked == false:
+			$reward.text = "BHOP UNLOCKED"
 			bhopUnlocked = true
 			print("bhop unlocked")
 		else:
 			get_parent().get_node("enemy_timer").start(10)
+			$reward.text = "MORE ENEMIES SPAWNED"
 	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D2:
+		$reward.text = "FIRE RATE INCREASED"
 		print("fire rate increased")
 		fireRate -= 0.1
 	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D3:
+		$reward.text = "HEALTH INCREASED"
 		print("increased health")
 		health += 10
 	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D5:
+		$reward.text = "PLAYER SPEED INCREASED"
 		print("speed increased")
 		if SPEED != 5:
 			SPEED = 6
 		else:
+			$reward.text = "MORE ENEMIES SPAWNED"
 			get_parent().get_node("enemy_timer").start(10)
 	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D:
+		$reward.text = "LOTS MORE ENEMIES SPAWNED"
 		get_parent().get_node("enemy_timer").start(.1)
 	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D6:
+		$reward.text = "LOTS MORE ENEMIES SPAWNED"
 		get_parent().get_node("enemy_timer").start(.1)
 	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D7:
 		if rocketShotUnlocked == false:
+			$reward.text = "ROCKET BOOST UNLOCKED"
 			rocketShotUnlocked = true
 		else:
+			$reward.text = "MORE NEMIES SPAWNED"
 			get_parent().get_node("enemy_timer").start(10)
+	
+	$reward.visible_ratio = 1
+	await get_tree().create_timer(2).timeout
+	var tween = get_tree().create_tween()
+	tween.tween_property($reward, "visible_ratio", 0, 0.5)
 
 
 func _on_slide_timer_timeout() -> void:

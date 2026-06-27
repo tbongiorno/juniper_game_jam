@@ -4,7 +4,7 @@ var target = null
 var target_position = null
 
 var HEALTH = 1
-var DAMAGE = 3
+var DAMAGE = 8
 var SPEED = 5
 var POINTS = 10
 

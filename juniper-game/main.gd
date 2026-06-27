@@ -66,7 +66,6 @@ func _on_timer_timeout():
 
 func _on_enemy_timer_timeout():
 	spawn_enemy()
-	
 
 
 func _on_button_pressed() -> void:

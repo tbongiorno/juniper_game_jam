@@ -127,6 +127,8 @@ func returnMouseMode():
 
 func _physics_process(delta):
 	
+	#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		
 	if health >= 1:
 		$RayCast3D.rotation.x = rotation_target_head
 		$RayCast3D.position = head_start_pos
@@ -149,7 +151,7 @@ func _physics_process(delta):
 
 				if collider.name.left(5) == "enemy":
 					points += collider.take_damage(damage)
-					print(points)
+					$Control/points.text = str(points)
 					
 			if rocketShotUnlocked == true:
 				if global_position.distance_to($explosion.global_position) <= 1.5:
@@ -214,7 +216,7 @@ func _process(delta):
 		var count = 1
 		
 	else:
-	
+		$Control/health.text = "Health: " + str(health)
 	
 		if Input.is_action_pressed("hud"):
 			inHud = true
@@ -330,7 +332,7 @@ func move_player(delta):
 		
 	# Handle Jump.
 	if Input.is_action_just_pressed(KEY_BIND_JUMP) and is_on_floor():
-		$bhopTimer.start(1.35)
+		$bhopTimer.start(1.5)
 		current_bhop_frames = current_bhop_frames + 1
 		print(current_bhop_frames)
 		velocity.y = JUMP_VELOCITY
@@ -377,7 +379,7 @@ func rotateWheel():
 			bhopUnlocked = true
 			print("bhop unlocked")
 		else:
-			get_parent().get_node("enemy_timer").start(10)
+			get_parent().get_node("enemy_timer").start(5)
 			$reward.text = "MORE ENEMIES SPAWNED"
 	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D2:
 		$reward.text = "FIRE RATE INCREASED"
@@ -391,23 +393,23 @@ func rotateWheel():
 		$reward.text = "PLAYER SPEED INCREASED"
 		print("speed increased")
 		if SPEED != 5:
-			SPEED = 6
+			SPEED = 8
 		else:
 			$reward.text = "MORE ENEMIES SPAWNED"
-			get_parent().get_node("enemy_timer").start(10)
+			get_parent().get_node("enemy_timer").start(5)
 	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D:
 		$reward.text = "LOTS MORE ENEMIES SPAWNED"
-		get_parent().get_node("enemy_timer").start(.1)
+		get_parent().get_node("enemy_timer").start(5)
 	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D6:
 		$reward.text = "LOTS MORE ENEMIES SPAWNED"
-		get_parent().get_node("enemy_timer").start(.1)
+		get_parent().get_node("enemy_timer").start(5)
 	elif wheelWinner == $gamblingHud/handOverlay/wheel/Area2D7:
 		if rocketShotUnlocked == false:
 			$reward.text = "ROCKET BOOST UNLOCKED"
 			rocketShotUnlocked = true
 		else:
 			$reward.text = "MORE NEMIES SPAWNED"
-			get_parent().get_node("enemy_timer").start(10)
+			get_parent().get_node("enemy_timer").start(5)
 	
 	$reward.visible_ratio = 1
 	await get_tree().create_timer(2).timeout

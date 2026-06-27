@@ -14,9 +14,6 @@ sky = SubResource("Sky_h2yge")
 [sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
 size = Vector3(43.97397, 1, 43.54065)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_0xm2m"]
-radius = 1.9856836
-
 [sub_resource type="LabelSettings" id="LabelSettings_1bvp3"]
 font = ExtResource("3_h2yge")
 font_size = 60
@@ -31,7 +28,7 @@ transparency = 1
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
 grow = true
-grow_amount = 0.05
+grow_amount = 0.07
 stencil_mode = 3
 stencil_flags = 1
 stencil_compare = 5
@@ -42,7 +39,7 @@ next_pass = SubResource("StandardMaterial3D_efxa6")
 specular_mode = 1
 stencil_mode = 1
 stencil_flags = 2
-stencil_outline_thickness = 0.05
+stencil_outline_thickness = 0.07
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dg77c"]
 render_priority = 1
@@ -50,7 +47,7 @@ transparency = 1
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
 grow = true
-grow_amount = 0.05
+grow_amount = 0.07
 stencil_mode = 3
 stencil_flags = 1
 stencil_compare = 5
@@ -62,7 +59,7 @@ next_pass = SubResource("StandardMaterial3D_dg77c")
 stencil_mode = 1
 stencil_flags = 2
 stencil_reference = 8
-stencil_outline_thickness = 0.05
+stencil_outline_thickness = 0.07
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ycdy4"]
 render_priority = 1
@@ -70,7 +67,7 @@ transparency = 1
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
 grow = true
-grow_amount = 0.05
+grow_amount = 0.07
 stencil_mode = 3
 stencil_flags = 1
 stencil_compare = 5
@@ -82,7 +79,7 @@ next_pass = SubResource("StandardMaterial3D_ycdy4")
 stencil_mode = 1
 stencil_flags = 2
 stencil_reference = 9
-stencil_outline_thickness = 0.05
+stencil_outline_thickness = 0.07
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w48qg"]
 render_priority = 1
@@ -90,7 +87,7 @@ transparency = 1
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
 grow = true
-grow_amount = 0.05
+grow_amount = 0.07
 stencil_mode = 3
 stencil_flags = 1
 stencil_compare = 5
@@ -102,7 +99,7 @@ next_pass = SubResource("StandardMaterial3D_w48qg")
 stencil_mode = 1
 stencil_flags = 2
 stencil_reference = 8
-stencil_outline_thickness = 0.05
+stencil_outline_thickness = 0.07
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vivmo"]
 render_priority = 1
@@ -110,7 +107,7 @@ transparency = 1
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
 grow = true
-grow_amount = 0.05
+grow_amount = 0.07
 stencil_mode = 3
 stencil_flags = 1
 stencil_compare = 5
@@ -122,7 +119,7 @@ next_pass = SubResource("StandardMaterial3D_vivmo")
 stencil_mode = 1
 stencil_flags = 2
 stencil_reference = 10
-stencil_outline_thickness = 0.05
+stencil_outline_thickness = 0.07
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cqfq"]
 render_priority = 1
@@ -130,7 +127,7 @@ transparency = 1
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
 grow = true
-grow_amount = 0.058
+grow_amount = 0.07
 stencil_mode = 3
 stencil_flags = 1
 stencil_compare = 5
@@ -142,7 +139,7 @@ next_pass = SubResource("StandardMaterial3D_2cqfq")
 stencil_mode = 1
 stencil_flags = 2
 stencil_reference = 12
-stencil_outline_thickness = 0.058
+stencil_outline_thickness = 0.07
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yaehf"]
 render_priority = 1
@@ -150,7 +147,7 @@ transparency = 1
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
 grow = true
-grow_amount = 0.05
+grow_amount = 0.07
 stencil_mode = 3
 stencil_flags = 1
 stencil_compare = 5
@@ -162,7 +159,7 @@ next_pass = SubResource("StandardMaterial3D_yaehf")
 stencil_mode = 1
 stencil_flags = 2
 stencil_reference = 10
-stencil_outline_thickness = 0.05
+stencil_outline_thickness = 0.07
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_074og"]
 render_priority = 1
@@ -170,7 +167,7 @@ transparency = 1
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
 grow = true
-grow_amount = 0.05
+grow_amount = 0.07
 stencil_mode = 3
 stencil_flags = 1
 stencil_compare = 5
@@ -182,7 +179,7 @@ next_pass = SubResource("StandardMaterial3D_074og")
 stencil_mode = 1
 stencil_flags = 2
 stencil_reference = 10
-stencil_outline_thickness = 0.05
+stencil_outline_thickness = 0.07
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cegan"]
 render_priority = 1
@@ -190,7 +187,7 @@ transparency = 1
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
 grow = true
-grow_amount = 0.05
+grow_amount = 0.07
 stencil_mode = 3
 stencil_flags = 1
 stencil_compare = 5
@@ -202,7 +199,25 @@ next_pass = SubResource("StandardMaterial3D_cegan")
 stencil_mode = 1
 stencil_flags = 2
 stencil_reference = 10
-stencil_outline_thickness = 0.05
+stencil_outline_thickness = 0.07
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_getpj"]
+render_priority = 1
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.07
+stencil_mode = 3
+stencil_flags = 1
+stencil_compare = 5
+metadata/_stencil_owned = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ryguw"]
+next_pass = SubResource("StandardMaterial3D_getpj")
+stencil_mode = 1
+stencil_flags = 2
+stencil_outline_thickness = 0.07
 
 [node name="main" type="Node3D" unique_id=217003159]
 script = ExtResource("1_1bvp3")
@@ -239,7 +254,7 @@ wait_time = 20.0
 autostart = true
 
 [node name="enemy_timer" type="Timer" parent="." unique_id=102786109]
-wait_time = 7.5
+wait_time = 5.0
 autostart = true
 
 [node name="enemy_spawn_area" type="Area3D" parent="." unique_id=1729502391]
@@ -249,14 +264,6 @@ collision_mask = 16
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="enemy_spawn_area" unique_id=2088047167]
 shape = SubResource("BoxShape3D_0xm2m")
-
-[node name="Area3D" type="Area3D" parent="." unique_id=425456786]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1237025, -0.51288986, -4.5317774)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1006777389]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.13654, 2.0017822, -5.163206)
-shape = SubResource("SphereShape3D_0xm2m")
-debug_color = Color(0.93506, 1.92523e-05, 0.640053, 0.41960785)
 
 [node name="startScreen" type="Control" parent="." unique_id=719974401]
 layout_mode = 3
@@ -322,57 +329,63 @@ panning_strength = 1.71
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1101560139]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.013412476, -1, 0.07163048)
 use_collision = true
-size = Vector3(80, 1, 80)
+size = Vector3(40, 1, 40)
 material = SubResource("StandardMaterial3D_h2yge")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1460784248]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 39, 40)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19, 20)
 use_collision = true
-size = Vector3(80, 80, 1)
+size = Vector3(40, 40, 1)
 material = SubResource("StandardMaterial3D_1bvp3")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1873282633]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 39, -40)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19, -20)
 use_collision = true
-size = Vector3(80, 80, 1)
+size = Vector3(40, 40, 1)
 material = SubResource("StandardMaterial3D_lquwl")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=930434406]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 39, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 19, 0)
 use_collision = true
-size = Vector3(1, 80, 80)
+size = Vector3(1, 40, 40)
 material = SubResource("StandardMaterial3D_7mycd")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=1240412747]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 39, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 19, 0)
 use_collision = true
-size = Vector3(1, 80, 80)
+size = Vector3(1, 40, 40)
 material = SubResource("StandardMaterial3D_272bh")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=311053818]
-transform = Transform3D(0.49999994, -0.8660254, 0, 0.8660254, 0.49999994, 0, 0, 0, 1, 5.624778, 8.138031, -29.30561)
+transform = Transform3D(0.49999994, -0.8660254, 0, 0.8660254, 0.49999994, 0, 0, 0, 1, 6.2505517, 3.3784943, -14.518784)
 use_collision = true
-size = Vector3(1, 36.760864, 20.706543)
+size = Vector3(1, 17.642456, 10)
 material = SubResource("StandardMaterial3D_4c57u")
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="." unique_id=418398292]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -24.878496, 17.268703, -29.243294)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -10.629368, 7.8606668, 0.25713348)
 use_collision = true
-size = Vector3(29.730042, 20.890472, 1)
+size = Vector3(18.869629, 39.609253, 1)
 material = SubResource("StandardMaterial3D_kek77")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=2012228846]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.051043, 8.296997, -27.662191)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.60386, 2.785881, -13.768346)
 use_collision = true
-radius = 2.5
-height = 18.593994
+radius = 1.25
+height = 9.0
 material = SubResource("StandardMaterial3D_5vw27")
 
 [node name="CSGBox3D8" type="CSGBox3D" parent="." unique_id=861278796]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 79, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 39, 0)
 use_collision = true
-size = Vector3(80, 1, 80)
+size = Vector3(40, 1, 40)
 material = SubResource("StandardMaterial3D_82xsv")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="." unique_id=1829430207]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.175728, 3.3319073, 15.273539)
+use_collision = true
+size = Vector3(20.878906, 10.0269165, 8.626465)
+material = SubResource("StandardMaterial3D_ryguw")
 
 [connection signal="timeout" from="speed_timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="enemy_timer" to="." method="_on_enemy_timer_timeout"]

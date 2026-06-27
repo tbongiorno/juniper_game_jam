@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bt6clupskooeg" path="res://images/clean_brute_sprite.png" id="2_ik4ec"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ot31v"]
-size = Vector3(2.6307373, 2.4959717, 0.569397)
+size = Vector3(2.6307373, 2.7123108, 1.3116531)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ik4ec"]
 size = Vector3(2.47229, 2.5061035, 1)
@@ -15,7 +15,7 @@ script = ExtResource("1_ik4ec")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=248500196]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=47563533]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.026062012, 0.74798584, 0.021575928)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.026062012, 0.7735443, 0.02336502)
 shape = SubResource("BoxShape3D_ot31v")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1926109751]

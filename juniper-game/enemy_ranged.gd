@@ -8,7 +8,7 @@ var bullet_speed = 8
 var bullet_direction = null
 
 var HEALTH = 3
-var DAMAGE = 3
+var DAMAGE = 8
 var SPEED = 2.5
 var POINTS = 20
 
@@ -36,6 +36,7 @@ func _on_shot_timer_timeout():
 	$bullet.position = Vector3(0, 0.5, 0)
 	print("FIRED")
 	bullet_moving = true
+	$bullet.show()
 	bullet_direction = (global_position - target_position).normalized()
 	bullet_direction.y /= 4
 	print(bullet_direction)
@@ -46,6 +47,7 @@ func _on_bullet_body_entered(body):
 		target.damage_player(DAMAGE)
 		print("SHOT")
 		bullet_moving = false
+		$bullet.hide()
 		$bullet.position = Vector3(0, 0.5, 0)
 		$bullet/CollisionShape3D2.disabled = true
 

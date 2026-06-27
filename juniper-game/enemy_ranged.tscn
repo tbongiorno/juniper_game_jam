@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cbsk724eqr4s" path="res://images/clean_range_sprite.png" id="2_uxmp5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uxmp5"]
-size = Vector3(2.6085205, 2.6212158, 1)
+size = Vector3(2.6085205, 2.8290405, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uxmp5"]
 
@@ -14,21 +14,23 @@ albedo_color = Color(0.6388842, 1.2995303e-06, 2.4065375e-07, 1)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_emokg"]
 material = SubResource("StandardMaterial3D_uxmp5")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_emokg"]
+size = Vector3(2.5668945, 2.7651367, 1)
+
 [node name="enemy_ranged" type="CharacterBody3D" unique_id=1433515235]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 script = ExtResource("1_be1o7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2063073997]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03375244, 0.8106079, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03375244, 0.91452026, 0)
 shape = SubResource("BoxShape3D_uxmp5")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=352812898]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7626476, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 texture = ExtResource("2_uxmp5")
 
 [node name="bullet" type="Area3D" parent="." unique_id=1728246226]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-visible = false
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="bullet" unique_id=1455137256]
 transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, -0.1, 0, 0.1, -4.371139e-09, 0, 0, 0)
@@ -41,6 +43,12 @@ mesh = SubResource("CapsuleMesh_emokg")
 [node name="shotTimer" type="Timer" parent="." unique_id=1269683126]
 wait_time = 5.0
 autostart = true
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1516763216]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1560129800]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.042236328, 0.88256836, 0)
+shape = SubResource("BoxShape3D_emokg")
 
 [connection signal="body_entered" from="bullet" to="." method="_on_bullet_body_entered"]
 [connection signal="timeout" from="shotTimer" to="." method="_on_shot_timer_timeout"]

@@ -4,13 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://byp25wj3kiav1" path="res://images/clean_melee_sprite.png" id="2_et1yx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2sfwx"]
-size = Vector3(2.567627, 2.6121826, 1)
+size = Vector3(1.4476318, 2.0940247, 1)
 
 [node name="enemy_melee" type="CharacterBody3D" unique_id=1775977917]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 script = ExtResource("1_qa0bm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=549836899]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.030212402, 0.7654743, 0)
 shape = SubResource("BoxShape3D_2sfwx")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1882234126]

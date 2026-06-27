@@ -21,7 +21,6 @@ func _process(delta):
 	pass
 
 
-
 func spawn_enemy():
 	print("SPAWNING ENEMY")
 	var random_float = random.randf()

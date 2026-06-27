@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cb8ngb2q24squ" path="res://images/bomb.png" id="3_27rsx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mct3d"]
-size = Vector3(2.5048523, 2.4610596, 0.75390625)
+size = Vector3(1.7408276, 2.4793396, 1.3560295)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pu648"]
 radius = 0.30508372
@@ -19,7 +19,7 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("1_pu648")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1754489031]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.022842407, 0.7305298, -0.123046875)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.052248955, 0.7396698, 0.061941147)
 shape = SubResource("BoxShape3D_mct3d")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=59940902]

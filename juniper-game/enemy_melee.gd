@@ -44,8 +44,7 @@ func take_damage(damage):
 		self.queue_free()
 		return POINTS
 	else:
-		await get_tree().create_timer(0.25).timeout
-		
 		$Sprite3D.texture = load("res://images/clean_melee_sprite.png")
 		$Sprite3D.modulate = Color(255, 255, 255)
 		SPEED /= 0.75
+		return 0

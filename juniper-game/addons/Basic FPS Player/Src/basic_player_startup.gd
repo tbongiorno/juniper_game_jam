@@ -121,7 +121,7 @@ func _physics_process(delta):
 	$RayCast3D.rotation.x = rotation_target_head
 	$RayCast3D.position = head_start_pos
 	
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
 	
 	
@@ -133,14 +133,14 @@ func _physics_process(delta):
 		$RayCast3D.enabled = true
 		print($RayCast3D.get_collision_point())
 		
-		if $RayCast3D.get_collider() != null:
-			var collider = $RayCast3D.get_collider().get_parent()
-			print(collider.name)
 		
-			if collider.name == "enemy_melee" or collider.name == "enemy_ranged" or collider.name == "enemy_fly" or collider.name == "enemy_bomb" or collider.name == "enemy_brute":
+		if $RayCast3D.get_collider() != null:
+			var collider = $RayCast3D.get_collider()
+			print(collider.name)
+
+			if collider.name.left(5) == "enemy":
 				points += collider.take_damage(damage)
 				print(points)
-		
 		
 		var point = $RayCast3D.get_collision_point()
 		$explosion.global_position = point
@@ -148,6 +148,16 @@ func _physics_process(delta):
 		$explosion.visible = true
 		$Control/gun.visible = false
 		$Control/shoot.visible = true
+		
+		#for body in $explosion/explosionArea.get_overlapping_bodies():
+			#print("// " + body.name + " //")
+			#if body.name.left(1) == "e":
+				#points += body.take_damage(damage)
+		
+		
+		if global_position.distance_to($explosion.global_position) <= 1.5:
+			velocity += Vector3(0, 10, 0)
+		
 		$shootTimer.start()
 		shootAvailable = false
 		

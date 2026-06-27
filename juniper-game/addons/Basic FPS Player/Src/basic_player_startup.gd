@@ -167,6 +167,9 @@ func _physics_process(delta):
 			await get_tree().create_timer(.1).timeout
 			$explosion.visible = false
 			
+			$AudioStreamPlayer3D2.play()
+			await get_tree().create_timer(1)
+			$AudioStreamPlayer3D2.stop()
 			
 		
 		# Increment player tick, used in head bob motion
@@ -363,8 +366,10 @@ func rotateWheel():
 	var rotateTween = create_tween()
 	var randi = randi_range(100, 360)
 	rotateTween.tween_property($gamblingHud/handOverlay/wheel, "rotation", $gamblingHud/handOverlay/wheel.rotation + randi, 8).set_trans(Tween.TRANS_SINE)
-	$AudioStreamPlayer2D.playing = true
+	$AudioStreamPlayer3D.playing = true
 	await rotateTween.finished
+	$AudioStreamPlayer3D.playing = false
+	$AudioStreamPlayer2D.play()
 	if wheelWinner == $gamblingHud/handOverlay/wheel/Area2D4:
 		if bhopUnlocked == false:
 			bhopUnlocked = true

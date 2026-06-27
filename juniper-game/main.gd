@@ -16,6 +16,7 @@ var startScreen = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	spawn_area = $enemy_spawn_area
+	$musicPlayer.playing = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -26,7 +27,7 @@ func _process(delta):
 		$startScreen/Button.visible = false
 		tween.tween_property($startScreen/ColorRect, "color", Color.TRANSPARENT, 1)
 		await tween.finished
-		$musicPlayer.start()
+		
 
 
 func spawn_enemy():

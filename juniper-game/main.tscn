@@ -134,7 +134,7 @@ vertical_alignment = 1
 
 [node name="musicPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1960159641]
 stream = ExtResource("4_1bvp3")
-volume_db = -29.226
+volume_db = -24.893
 attenuation = 0.0013810707
 max_polyphony = 2
 panning_strength = 1.71

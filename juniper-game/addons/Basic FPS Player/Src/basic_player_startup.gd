@@ -135,7 +135,7 @@ func _physics_process(delta):
 		return
 		
 	if Input.is_action_just_pressed("shoot") and shootAvailable and not inHud:
-		
+		shootAvailable = false
 		$RayCast3D.enabled = true
 		print($RayCast3D.get_collision_point())
 		
@@ -147,22 +147,18 @@ func _physics_process(delta):
 			if collider.name.left(5) == "enemy":
 				points += collider.take_damage(damage)
 				print(points)
-		
-		var point = $RayCast3D.get_collision_point()
-		$explosion.global_position = point
-
-		$explosion.visible = true
-		$Control/gun.visible = false
-		$Control/shoot.visible = true
-		
-		#for body in $explosion/explosionArea.get_overlapping_bodies():
-			#print("// " + body.name + " //")
-			#if body.name.left(1) == "e":
-				#points += body.take_damage(damage)
-		
+				
 		if rocketShotUnlocked == true:
 			if global_position.distance_to($explosion.global_position) <= 1.5:
 				velocity += Vector3(0, 10, 0)
+		
+		if $RayCast3D.is_colliding():
+			var point = $RayCast3D.get_collision_point()
+			$explosion.global_position = point
+			print($explosion.global_position)
+			$explosion.visible = true
+			$Control/gun.visible = false
+			$Control/shoot.visible = true
 		
 		$shootTimer.start(fireRate)
 		await get_tree().create_timer(.1).timeout
@@ -204,7 +200,6 @@ func _process(delta):
 		var tween = create_tween()
 		tween.tween_property($gamblingHud/handOverlay, "global_position", Vector2(577, 323), 1)
 		$gamblingHud/pointerFinger.global_position = $gamblingHud.get_global_mouse_position()
-		$gamblingHud/handOverlay/wheel.rotate(1)
 	else:
 		$Control.visible = true
 		$gamblingHud/pointerFinger.visible = false
